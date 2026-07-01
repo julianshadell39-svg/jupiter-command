@@ -1,36 +1,39 @@
 # jupiter-command
-AI Command Center for Jupiter DeFi on Solana. Built with Base44. Features wallet connect, Jupiter Terminal integration, Superagent AI for natural language DeFi commands, portfolio analytics. Bootstrapped MVP with freemium SaaS model.
 
-## Phase 1 Focus: Financial Support and Cooperation Growth
+Donation website MVP for **HopeSpring Foundation**.
 
-- Map support network: family, peers, mentors, community groups, and professional contacts.
-- Define two cooperation goals:
-  - One accountability partner.
-  - One collaboration project.
-- Schedule weekly financial check-ins with a trusted partner.
-- Create a shared growth plan with:
-  - Income goals.
-  - Responsibilities.
-  - Timelines.
-  - Review dates.
-- Identify cooperation opportunities:
-  - Joint freelancing.
-  - Referrals (received and given).
-  - Shared resources.
-  - Group buying.
+## What is included
 
-### Weekly KPIs
+- Donation goal and audience definition (cause, donor types, supported regions/currencies)
+- MVP pages:
+  - Home
+  - About Cause
+  - Donate
+  - Impact/Updates
+  - Contact
+  - FAQ
+- Multi-step donation flow:
+  - Amount selection
+  - Donor information
+  - Payment provider selection (Stripe/PayPal placeholders)
+  - Confirmation and receipt message
+- Trust essentials:
+  - Transparent fund usage split
+  - Organization details
+  - Privacy policy and terms
+  - Secure payment indicators
+- Admin basics:
+  - Donation records table
+  - CSV export
+  - Campaign metrics (conversion, average donation, recurring rate, funnel drop-off)
+  - Publish impact updates
+- Mobile-first responsive layout with semantic and accessible HTML structure
 
-- Number of support meetings.
-- Referrals received and given.
-- Joint opportunities created.
-- Extra income from collaboration.
+## Running locally
 
-### End-of-Month Review
+Open `/home/runner/work/jupiter-command/jupiter-command/index.html` in a browser.
 
-- Keep high-trust, high-return partnerships.
-- Pause low-impact partnerships.
+## Notes
 
-## Product Scope Update
-
-- Add pump.fun integration to supported Solana DeFi workflows.
+- Data is stored in browser `localStorage` for MVP/demo purposes.
+- Payment links are configured in `/home/runner/work/jupiter-command/jupiter-command/script.js` (`PAYMENT_LINKS`) and can be replaced with real checkout URLs.

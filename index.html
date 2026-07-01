@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Support Clean Water Initiative with secure one-time and recurring donations."
+    />
+    <title>HopeSpring Donations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#home" class="logo" aria-label="HopeSpring home">HopeSpring</a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+          <a href="#home">Home</a>
+          <a href="#about">About Cause</a>
+          <a href="#donate">Donate</a>
+          <a href="#impact">Impact</a>
+          <a href="#contact">Contact</a>
+          <a href="#faq">FAQ</a>
+          <a href="#admin" class="admin-link">Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="home" class="hero section">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Donation Goal & Audience</p>
+            <h1>Fund clean water systems for underserved schools</h1>
+            <p>
+              We support schools in East Africa with water filtration, hygiene education, and maintenance.
+              Donations are open to individuals, companies, and community groups.
+            </p>
+            <ul class="pill-list" aria-label="Donation audience and support scope">
+              <li>Donors: Individuals, teams, sponsors</li>
+              <li>Cause: Clean water & sanitation</li>
+              <li>Plans: One-time & monthly recurring</li>
+              <li>Regions: US, EU, UK, Kenya</li>
+              <li>Currencies: USD, EUR, GBP, KES</li>
+            </ul>
+            <a class="button primary" href="#donate">Donate now</a>
+          </div>
+          <aside class="card trust-card" aria-label="Trust and transparency snapshot">
+            <h2>Where funds go</h2>
+            <dl>
+              <div>
+                <dt>75%</dt>
+                <dd>Water equipment & installation</dd>
+              </div>
+              <div>
+                <dt>15%</dt>
+                <dd>Local training & maintenance</dd>
+              </div>
+              <div>
+                <dt>10%</dt>
+                <dd>Operations & compliance</dd>
+              </div>
+            </dl>
+            <p class="small">Audited annually. Registered non-profit ID: HS-44812.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container grid-2">
+          <article>
+            <h2>About the cause</h2>
+            <p>
+              Every donation helps deliver safe drinking water and reliable sanitation at schools that currently
+              lack clean water access. We prioritize long-term sustainability with local operators and school
+              maintenance plans.
+            </p>
+            <h3>Organization details</h3>
+            <ul>
+              <li>Organization: HopeSpring Foundation</li>
+              <li>Email: support@hopespring.example</li>
+              <li>Address: 15 Community Lane, Nairobi, Kenya</li>
+              <li>Registration: HS-44812</li>
+            </ul>
+          </article>
+          <article>
+            <h2>Launch checklist</h2>
+            <ul class="checklist">
+              <li><input type="checkbox" checked disabled />Domain connected</li>
+              <li><input type="checkbox" checked disabled />SSL certificate active</li>
+              <li><input type="checkbox" checked disabled />Analytics enabled</li>
+              <li><input type="checkbox" checked disabled />Donation test transactions passed</li>
+              <li><input type="checkbox" checked disabled />Backup and support workflow configured</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="donate" class="section alt">
+        <div class="container">
+          <div class="section-header">
+            <h2>Donate</h2>
+            <p>Complete all steps to support one-time or monthly giving.</p>
+          </div>
+
+          <ol class="stepper" aria-label="Donation steps">
+            <li data-step="1" class="active">Amount</li>
+            <li data-step="2">Donor info</li>
+            <li data-step="3">Payment</li>
+            <li data-step="4">Confirm</li>
+          </ol>
+
+          <form id="donation-form" class="card form-grid" novalidate>
+            <fieldset data-panel="1" class="form-panel active">
+              <legend>Step 1: Choose amount</legend>
+              <label for="frequency">Frequency</label>
+              <select id="frequency" name="frequency" required>
+                <option value="one-time">One-time</option>
+                <option value="monthly">Monthly recurring</option>
+              </select>
+
+              <label for="currency">Currency</label>
+              <select id="currency" name="currency" required>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="KES">KES</option>
+              </select>
+
+              <div>
+                <p class="label">Select amount</p>
+                <div class="amount-options" role="group" aria-label="Preset donation amounts">
+                  <button type="button" class="amount-btn" data-amount="25">25</button>
+                  <button type="button" class="amount-btn" data-amount="50">50</button>
+                  <button type="button" class="amount-btn" data-amount="100">100</button>
+                  <button type="button" class="amount-btn" data-amount="250">250</button>
+                </div>
+              </div>
+
+              <label for="amount">Custom amount</label>
+              <input id="amount" name="amount" type="number" min="1" step="1" required />
+
+              <button type="button" class="button primary" data-next>Continue</button>
+            </fieldset>
+
+            <fieldset data-panel="2" class="form-panel">
+              <legend>Step 2: Donor info</legend>
+              <label for="fullName">Full name</label>
+              <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+
+              <label for="country">Country / Region</label>
+              <input id="country" name="country" type="text" required />
+
+              <div class="button-row">
+                <button type="button" class="button ghost" data-prev>Back</button>
+                <button type="button" class="button primary" data-next>Continue</button>
+              </div>
+            </fieldset>
+
+            <fieldset data-panel="3" class="form-panel">
+              <legend>Step 3: Payment</legend>
+              <label for="provider">Payment provider</label>
+              <select id="provider" name="provider" required>
+                <option value="stripe">Stripe Checkout</option>
+                <option value="paypal">PayPal</option>
+              </select>
+
+              <p class="small">
+                Demo mode: payment redirects are mocked. Configure real checkout links in
+                <code>script.js</code>.
+              </p>
+
+              <div class="secure-badges" aria-label="Secure payment badges">
+                <span>🔒 PCI DSS</span>
+                <span>🛡️ SSL Secured</span>
+                <span>✅ Recurring enabled</span>
+              </div>
+
+              <div class="button-row">
+                <button type="button" class="button ghost" data-prev>Back</button>
+                <button type="button" class="button primary" data-next>Continue</button>
+              </div>
+            </fieldset>
+
+            <fieldset data-panel="4" class="form-panel">
+              <legend>Step 4: Confirm</legend>
+              <div id="confirmation-preview" class="summary"></div>
+              <label class="terms-box">
+                <input id="acceptTerms" name="acceptTerms" type="checkbox" required />
+                I agree to the <a href="#terms">terms</a> and <a href="#privacy">privacy policy</a>.
+              </label>
+              <div class="button-row">
+                <button type="button" class="button ghost" data-prev>Back</button>
+                <button type="submit" class="button primary">Complete donation</button>
+              </div>
+            </fieldset>
+            <p id="donation-status" class="status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="impact" class="section">
+        <div class="container grid-2">
+          <article>
+            <h2>Impact and updates</h2>
+            <p>Latest updates from projects funded by donor support.</p>
+            <ul id="impact-updates" class="updates"></ul>
+          </article>
+          <article>
+            <h2>Post-launch metrics</h2>
+            <dl class="metrics" id="public-metrics"></dl>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section alt">
+        <div class="container grid-2">
+          <article>
+            <h2>Contact</h2>
+            <p>Questions or donor support requests:</p>
+            <ul>
+              <li>Email: support@hopespring.example</li>
+              <li>Phone: +254-20-000-0000</li>
+              <li>Support hours: Mon-Fri, 9:00-17:00 EAT</li>
+            </ul>
+          </article>
+          <article>
+            <h2 id="faq">FAQ</h2>
+            <details>
+              <summary>Can I donate monthly?</summary>
+              <p>Yes. Select “Monthly recurring” in the donation form.</p>
+            </details>
+            <details>
+              <summary>Will I receive a receipt?</summary>
+              <p>Yes. A receipt is generated immediately and sent to your email address.</p>
+            </details>
+            <details>
+              <summary>How do you report impact?</summary>
+              <p>We publish regular updates and key metrics in the Impact section.</p>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <section id="privacy" class="section">
+        <div class="container legal">
+          <h2>Privacy Policy</h2>
+          <p>
+            We collect donor information only for donation processing, receipts, compliance, and communication.
+            We do not sell personal data. You can request deletion by contacting support.
+          </p>
+        </div>
+      </section>
+
+      <section id="terms" class="section alt">
+        <div class="container legal">
+          <h2>Terms</h2>
+          <p>
+            Donations are voluntary and may be tax-deductible where applicable. Recurring donations remain active
+            until canceled by the donor. Refund requests are reviewed within 10 business days.
+          </p>
+        </div>
+      </section>
+
+      <section id="admin" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Admin basics</h2>
+            <p>View donations, export records, track campaign performance, and publish updates.</p>
+          </div>
+          <div class="card admin-panel">
+            <div class="button-row">
+              <button id="export-csv" class="button">Export donations CSV</button>
+              <button id="seed-demo" class="button ghost">Seed demo data</button>
+            </div>
+            <h3>Donations</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Donor</th>
+                    <th>Email</th>
+                    <th>Frequency</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                    <th>Provider</th>
+                  </tr>
+                </thead>
+                <tbody id="donations-table"></tbody>
+              </table>
+            </div>
+
+            <h3>Campaign metrics</h3>
+            <dl id="admin-metrics" class="metrics"></dl>
+
+            <h3>Publish impact update</h3>
+            <form id="update-form" class="inline-form">
+              <label for="update-input">Update text</label>
+              <input id="update-input" name="update" type="text" required maxlength="160" />
+              <button class="button" type="submit">Publish</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> HopeSpring Foundation. Secure donations for clean water access.</p>
+      </div>
+    </footer>
+
+    <script src="/script.js" defer></script>
+  </body>
+</html>
