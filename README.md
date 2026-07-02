@@ -1,6 +1,6 @@
 # jupiter-command
 
-Donation website MVP for **HopeSpring Foundation**.
+Donation website MVP for **AROHM Foundation**.
 
 ## What is included
 
