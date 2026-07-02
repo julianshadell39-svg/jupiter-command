@@ -24,8 +24,116 @@
   <meta property="og:title" content="Jupiter Command" />
   <meta property="og:description" content="AI Command Center for Jupiter DeFi on Solana" />
   <meta property="og:image" content="/icons/jupiter-icon.svg" />
+
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <div id="app"></div>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header>
+    <a class="logo" href="/">
+      <img src="/icons/jupiter-icon.svg" alt="Jupiter Command icon" />
+      <span class="logo-name">Jupiter <span>Command</span></span>
+    </a>
+    <button id="wallet-btn" type="button" aria-label="Connect wallet">
+      <span class="wallet-dot" id="wallet-dot"></span>
+      <span id="wallet-btn-label">Connect Wallet</span>
+    </button>
+  </header>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main>
+
+    <!-- Hero -->
+    <img src="/icons/jupiter-icon.svg" alt="Jupiter" class="hero-icon" />
+    <h1>Jupiter <span>Command</span></h1>
+    <p class="tagline">AI Command Center for Jupiter DeFi on Solana. Connect your wallet to begin.</p>
+
+    <!-- No-wallet warning -->
+    <div id="no-wallet-banner">
+      No Solana wallet detected.
+      <a href="https://phantom.app" target="_blank" rel="noopener noreferrer">Install Phantom</a>
+      or another Solana wallet extension to continue.
+    </div>
+
+    <!-- Wallet card -->
+    <div id="wallet-card"></div>
+
+    <!-- ── Multi-Platform Agent Panel ──────────────── -->
+    <section id="agent-panel">
+      <div class="agent-panel-header">
+        <div class="agent-title-row">
+          <span class="agent-pulse-dot" id="agent-pulse"></span>
+          <h2 class="agent-title">Multi-Platform Agent</h2>
+        </div>
+        <span class="agent-subtitle">Monitoring all surfaces in real time</span>
+      </div>
+
+      <!-- Platform tiles -->
+      <div class="platform-grid">
+        <div class="platform-tile" id="tile-web">
+          <div class="platform-icon">🌐</div>
+          <div class="platform-info">
+            <span class="platform-name">Web</span>
+            <span class="platform-status" id="status-web">Detecting…</span>
+          </div>
+          <span class="platform-badge" id="badge-web"></span>
+        </div>
+        <div class="platform-tile" id="tile-pwa">
+          <div class="platform-icon">📱</div>
+          <div class="platform-info">
+            <span class="platform-name">PWA / Home Screen</span>
+            <span class="platform-status" id="status-pwa">Detecting…</span>
+          </div>
+          <span class="platform-badge" id="badge-pwa"></span>
+        </div>
+        <div class="platform-tile" id="tile-ios">
+          <div class="platform-icon"></div>
+          <div class="platform-info">
+            <span class="platform-name">iOS</span>
+            <span class="platform-status" id="status-ios">Detecting…</span>
+          </div>
+          <span class="platform-badge" id="badge-ios"></span>
+        </div>
+        <div class="platform-tile" id="tile-android">
+          <div class="platform-icon">🤖</div>
+          <div class="platform-info">
+            <span class="platform-name">Android</span>
+            <span class="platform-status" id="status-android">Detecting…</span>
+          </div>
+          <span class="platform-badge" id="badge-android"></span>
+        </div>
+        <div class="platform-tile" id="tile-desktop">
+          <div class="platform-icon">🖥️</div>
+          <div class="platform-info">
+            <span class="platform-name">Desktop</span>
+            <span class="platform-status" id="status-desktop">Detecting…</span>
+          </div>
+          <span class="platform-badge" id="badge-desktop"></span>
+        </div>
+        <div class="platform-tile" id="tile-network">
+          <div class="platform-icon">📡</div>
+          <div class="platform-info">
+            <span class="platform-name">Network</span>
+            <span class="platform-status" id="status-network">Detecting…</span>
+          </div>
+          <span class="platform-badge" id="badge-network"></span>
+        </div>
+      </div>
+
+      <!-- Activity feed -->
+      <div class="agent-feed-header">
+        <span>Agent Activity Log</span>
+        <button class="feed-clear-btn" id="feed-clear-btn" type="button">Clear</button>
+      </div>
+      <ul class="agent-feed" id="agent-feed" aria-live="polite" aria-label="Agent activity log"></ul>
+    </section>
+
+  </main>
+
+  <!-- Toast notification -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/script.js"></script>
 </body>
 </html>
