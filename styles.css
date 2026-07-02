@@ -57,9 +57,28 @@ body {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   font-weight: 700;
   color: var(--text);
   text-decoration: none;
+}
+
+.logo img {
+  border-radius: 8px;
+}
+
+.app-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.app-badge img {
+  border-radius: 6px;
 }
 
 .site-nav {
