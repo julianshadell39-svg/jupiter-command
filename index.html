@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JUPITER COMMAND — AI Communicator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Boot Overlay -->
+  <div id="boot-overlay">
+    <div class="boot-text">
+      <span id="boot-line">JUPITER COMMAND SYSTEM INITIALIZING...</span>
+      <div class="boot-bar"><div id="boot-progress"></div></div>
+    </div>
+  </div>
+
+  <!-- Main HUD -->
+  <div id="hud" class="hidden">
+
+    <!-- Header Bar -->
+    <header class="hud-header">
+      <div class="header-left">
+        <div class="status-dot pulse"></div>
+        <span class="sys-label">JUPITER COMMAND</span>
+      </div>
+      <div class="header-center">
+        <span id="hud-clock"></span>
+      </div>
+      <div class="header-right">
+        <span class="sys-label" id="net-status">● ONLINE</span>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="hud-grid">
+
+      <!-- LEFT PANEL: Live Data -->
+      <aside class="panel panel-left">
+        <div class="panel-title">◈ LIVE INTEL</div>
+        <div class="ticker-grid" id="ticker-grid">
+          <div class="ticker-item" id="tick-sol">
+            <span class="tick-name">SOL</span>
+            <span class="tick-price" id="price-sol">—</span>
+            <span class="tick-change" id="change-sol">—</span>
+          </div>
+          <div class="ticker-item" id="tick-jup">
+            <span class="tick-name">JUP</span>
+            <span class="tick-price" id="price-jup">—</span>
+            <span class="tick-change" id="change-jup">—</span>
+          </div>
+          <div class="ticker-item" id="tick-btc">
+            <span class="tick-name">BTC</span>
+            <span class="tick-price" id="price-btc">—</span>
+            <span class="tick-change" id="change-btc">—</span>
+          </div>
+          <div class="ticker-item" id="tick-eth">
+            <span class="tick-name">ETH</span>
+            <span class="tick-price" id="price-eth">—</span>
+            <span class="tick-change" id="change-eth">—</span>
+          </div>
+          <div class="ticker-item" id="tick-bnb">
+            <span class="tick-name">BNB</span>
+            <span class="tick-price" id="price-bnb">—</span>
+            <span class="tick-change" id="change-bnb">—</span>
+          </div>
+        </div>
+
+        <div class="panel-divider"></div>
+        <div class="panel-title">◈ QUICK COMMANDS</div>
+        <div class="quick-cmds">
+          <button class="cmd-btn" onclick="quickCmd('price sol')">SOL Price</button>
+          <button class="cmd-btn" onclick="quickCmd('price jup')">JUP Price</button>
+          <button class="cmd-btn" onclick="quickCmd('price btc')">BTC Price</button>
+          <button class="cmd-btn" onclick="quickCmd('what is jupiter')">What is Jupiter</button>
+          <button class="cmd-btn" onclick="quickCmd('help')">All Commands</button>
+        </div>
+      </aside>
+
+      <!-- CENTER PANEL: AI Communicator -->
+      <main class="panel panel-center">
+
+        <!-- AI Avatar -->
+        <div class="ai-avatar-zone">
+          <div class="radar-ring ring-1"></div>
+          <div class="radar-ring ring-2"></div>
+          <div class="radar-ring ring-3"></div>
+          <div class="avatar-core" id="avatar-core">
+            <svg viewBox="0 0 100 100" class="avatar-svg" aria-hidden="true">
+              <!-- Jupiter-style planet -->
+              <circle cx="50" cy="50" r="36" fill="url(#planetGrad)" />
+              <ellipse cx="50" cy="50" rx="48" ry="12" fill="none" stroke="#00e5ff" stroke-width="1.5" opacity="0.5"/>
+              <ellipse cx="50" cy="50" rx="44" ry="9" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.4"/>
+              <circle cx="50" cy="50" r="36" fill="none" stroke="#00e5ff" stroke-width="0.8" opacity="0.6"/>
+              <defs>
+                <radialGradient id="planetGrad" cx="40%" cy="35%">
+                  <stop offset="0%" stop-color="#7c3aed"/>
+                  <stop offset="60%" stop-color="#1a0533"/>
+                  <stop offset="100%" stop-color="#000"/>
+                </radialGradient>
+              </defs>
+            </svg>
+            <div class="avatar-label">ALFRED</div>
+          </div>
+        </div>
+
+        <!-- Voice Wave -->
+        <div class="voice-wave" id="voice-wave">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <!-- Chat Log -->
+        <div class="chat-log" id="chat-log">
+          <div class="msg msg-alfred">
+            <span class="msg-sender">ALFRED</span>
+            <span class="msg-text">Jupiter Command online. I am ALFRED — your AI field operative. Speak a command or type below. I can monitor live crypto intelligence, brief you on DeFi operations, and more. What do you need?</span>
+          </div>
+        </div>
+
+        <!-- Input Bar -->
+        <div class="input-bar">
+          <button class="mic-btn" id="mic-btn" title="Hold to speak" aria-label="Voice input">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="2" width="6" height="12" rx="3"/>
+              <path d="M19 10a7 7 0 01-14 0"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+          <input
+            type="text"
+            id="cmd-input"
+            class="cmd-input"
+            placeholder="Enter command..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="send-btn" id="send-btn" title="Send">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+
+      </main>
+
+      <!-- RIGHT PANEL: System Status -->
+      <aside class="panel panel-right">
+        <div class="panel-title">◈ SYSTEM STATUS</div>
+        <div class="stat-row">
+          <span class="stat-label">AI ENGINE</span>
+          <span class="stat-val green">ACTIVE</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">VOICE I/O</span>
+          <span class="stat-val" id="voice-status">CHECKING...</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">MARKET FEED</span>
+          <span class="stat-val" id="feed-status">CONNECTING...</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">PROTOCOL</span>
+          <span class="stat-val cyan">SOLANA</span>
+        </div>
+
+        <div class="panel-divider"></div>
+        <div class="panel-title">◈ MISSION LOG</div>
+        <div class="mission-log" id="mission-log"></div>
+
+        <div class="panel-divider"></div>
+        <div class="panel-title">◈ VOICE CONTROL</div>
+        <div class="voice-guide">
+          <div class="vg-row">🎙️ "Price SOL"</div>
+          <div class="vg-row">🎙️ "What is Jupiter"</div>
+          <div class="vg-row">🎙️ "Market summary"</div>
+          <div class="vg-row">🎙️ "Help"</div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="hud-footer">
+      <span>JUPITER COMMAND © 2026 · <a href="https://howtogiveback.org" target="_blank" rel="noopener">howtogiveback.org</a></span>
+      <span>Powered by Jupiter DEX · Solana Network</span>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
