@@ -36,9 +36,9 @@
   <path d="M 136 256 Q 256 198 376 256" fill="none" stroke="#e8983a" stroke-width="14" opacity="0.55" stroke-linecap="round"/>
   <path d="M 151 256 Q 256 204 361 256" fill="none" stroke="#c97c2e" stroke-width="8" opacity="0.4" stroke-linecap="round"/>
 
-  <!-- Command cursor symbol -->
-  <text x="256" y="275" font-family="monospace, 'Courier New'" font-size="52" font-weight="bold"
-        fill="#00e5ff" text-anchor="middle" opacity="0.92">⌘</text>
+  <!-- Club symbol -->
+  <text x="256" y="282" font-family="serif, Georgia" font-size="72" font-weight="bold"
+        fill="#00e5ff" text-anchor="middle" opacity="0.92">♣</text>
 
   <!-- Definitions -->
   <defs>
