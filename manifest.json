@@ -1,0 +1,18 @@
+{
+  "name": "Jupiter Command",
+  "short_name": "Jupiter",
+  "description": "AI Command Center for Jupiter DeFi on Solana",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a1a",
+  "theme_color": "#c97c2e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/jupiter-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
