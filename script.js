@@ -135,7 +135,7 @@ function appendChatMsg(text, role) {
 
   const bubble = document.createElement('div');
   bubble.className = 'chat-bubble';
-  bubble.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  bubble.innerHTML = escHtml(text).replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
   wrap.appendChild(avatar);
   wrap.appendChild(bubble);
@@ -207,11 +207,11 @@ function analyzeNC(code, filename) {
   if (reportCard) reportCard.style.display = 'block';
   if (reportBody) {
     reportBody.innerHTML =
-      '<strong style="color:var(--text-primary)">' + filename + '</strong><br><br>' +
-      'Total lines: ' + lines.length + '<br>' +
-      'Rapid moves (G0): ' + rapids + '<br>' +
-      'Feed moves (G1): ' + feeds + '<br>' +
-      'Incremental blocks (G91): ' + issues + '<br><br>' +
+      '<strong style="color:var(--text-primary)">' + escHtml(filename) + '</strong><br><br>' +
+      'Total lines: ' + Number(lines.length) + '<br>' +
+      'Rapid moves (G0): ' + Number(rapids) + '<br>' +
+      'Feed moves (G1): ' + Number(feeds) + '<br>' +
+      'Incremental blocks (G91): ' + Number(issues) + '<br><br>' +
       (issues > 0
         ? '<span class="chip chip-warning">⚠ Review incremental mode usage</span>'
         : '<span class="chip chip-success">✔ No critical issues found</span>');
