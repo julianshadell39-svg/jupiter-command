@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jupiter Command — CAM Command Center</title>
+  <link rel="icon" type="image/svg+xml" href="./arohm-icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header id="header">
+  <button id="burger" aria-label="Toggle menu">☰</button>
+  <a class="logo" href="#" data-nav="dashboard">
+    <img src="./arohm-icon.svg" alt="Jupiter Command logo" />
+    <div>
+      <div class="logo-text">Jupiter Command</div>
+      <div class="logo-sub">CAM Command Center</div>
+    </div>
+  </a>
+  <div class="spacer"></div>
+  <div class="status-badge"><span class="dot"></span>System Online</div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════
+     APP SHELL
+════════════════════════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- ── Sidebar ─────────────────────────────────────────── -->
+  <nav id="sidebar">
+
+    <div class="nav-section">
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item active" data-nav="dashboard">
+        <span class="nav-icon">⬡</span>
+        <span class="nav-label">Dashboard</span>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Integrations</div>
+      <!-- Parent toggle -->
+      <div class="nav-item nav-parent" data-parent="integrations">
+        <span class="nav-icon">🔌</span>
+        <span class="nav-label">Integrations</span>
+        <span class="nav-chevron">›</span>
+      </div>
+      <!-- Sub-items -->
+      <div class="nav-sub" id="sub-integrations">
+        <div class="nav-sub-item" data-nav="fusion">⚙ Fusion Adapter</div>
+        <div class="nav-sub-item" data-nav="mastercam">⚙ Mastercam Adapter</div>
+        <div class="nav-sub-item" data-nav="nx">⚙ Siemens NX Adapter</div>
+        <div class="nav-sub-item" data-nav="gibbscam">⚙ GibbsCAM Adapter</div>
+        <div class="nav-sub-item" data-nav="solidcam">⚙ SolidCAM Adapter</div>
+        <div class="nav-sub-item" data-nav="creo">⚙ Creo Adapter</div>
+        <div class="nav-sub-item" data-nav="custom-api">⚙ Custom Adapter API</div>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Tools</div>
+      <div class="nav-item" data-nav="ai-assistant">
+        <span class="nav-icon">🤖</span>
+        <span class="nav-label">AI Assistant</span>
+      </div>
+      <div class="nav-item" data-nav="toolpath">
+        <span class="nav-icon">📐</span>
+        <span class="nav-label">Toolpath Analysis</span>
+      </div>
+      <div class="nav-item" data-nav="job-library">
+        <span class="nav-icon">📁</span>
+        <span class="nav-label">Job Library</span>
+      </div>
+      <div class="nav-item" data-nav="machine-profiles">
+        <span class="nav-icon">🏭</span>
+        <span class="nav-label">Machine Profiles</span>
+      </div>
+      <div class="nav-item" data-nav="simulation">
+        <span class="nav-icon">🎮</span>
+        <span class="nav-label">Simulation</span>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Advanced</div>
+      <div class="nav-item" data-nav="automation">
+        <span class="nav-icon">⚡</span>
+        <span class="nav-label">Automation Engine</span>
+      </div>
+      <div class="nav-item" data-nav="plugins">
+        <span class="nav-icon">🧩</span>
+        <span class="nav-label">Plugin Manager</span>
+      </div>
+    </div>
+
+  </nav>
+
+  <!-- ── Main panels ──────────────────────────────────────── -->
+  <main id="main">
+
+    <!-- ─────────────────── DASHBOARD ───────────────────── -->
+    <section class="panel active" id="panel-dashboard">
+      <div class="page-header">
+        <div class="page-icon">⬡</div>
+        <div>
+          <div class="page-title">Dashboard</div>
+          <div class="page-subtitle">Jupiter Command Overview</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-value">7</div>
+          <div class="stat-label">Adapters Connected</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="stat-jobs">0</div>
+          <div class="stat-label">Jobs in Library</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="stat-machines">0</div>
+          <div class="stat-label">Machine Profiles</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="stat-plugins">0</div>
+          <div class="stat-label">Active Plugins</div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card" style="cursor:pointer" data-nav="integrations-parent">
+          <div class="card-header">
+            <span class="card-icon">🔌</span>
+            <div>
+              <div class="card-title">Integrations</div>
+              <div class="card-sub">7 CAM adapters available</div>
+            </div>
+          </div>
+          <div class="card-body">Connect to Fusion 360, Mastercam, Siemens NX, GibbsCAM, SolidCAM, Creo, or build your own with the Custom Adapter API.</div>
+        </div>
+
+        <div class="card" style="cursor:pointer" data-nav="ai-assistant">
+          <div class="card-header">
+            <span class="card-icon">🤖</span>
+            <div>
+              <div class="card-title">AI Assistant</div>
+              <div class="card-sub">Natural language CAM commands</div>
+            </div>
+          </div>
+          <div class="card-body">Ask questions, generate toolpaths, optimize feeds &amp; speeds, and troubleshoot machining problems with the AI assistant.</div>
+        </div>
+
+        <div class="card" style="cursor:pointer" data-nav="toolpath">
+          <div class="card-header">
+            <span class="card-icon">📐</span>
+            <div>
+              <div class="card-title">Toolpath Analysis</div>
+              <div class="card-sub">Inspect and validate toolpaths</div>
+            </div>
+          </div>
+          <div class="card-body">Visualize and analyze generated toolpaths, detect collisions, optimize cycle times, and review step-overs.</div>
+        </div>
+
+        <div class="card" style="cursor:pointer" data-nav="simulation">
+          <div class="card-header">
+            <span class="card-icon">🎮</span>
+            <div>
+              <div class="card-title">Simulation</div>
+              <div class="card-sub">3-axis material removal preview</div>
+            </div>
+          </div>
+          <div class="card-body">Run full stock-removal simulation before cutting. Detect gouges, residual stock, and verify tolerances.</div>
+        </div>
+
+        <div class="card" style="cursor:pointer" data-nav="automation">
+          <div class="card-header">
+            <span class="card-icon">⚡</span>
+            <div>
+              <div class="card-title">Automation Engine</div>
+              <div class="card-sub">Rules-based CAM workflows</div>
+            </div>
+          </div>
+          <div class="card-body">Automate repetitive CAM tasks: feature recognition, template application, post-processing, and NC output.</div>
+        </div>
+
+        <div class="card" style="cursor:pointer" data-nav="plugins">
+          <div class="card-header">
+            <span class="card-icon">🧩</span>
+            <div>
+              <div class="card-title">Plugin Manager</div>
+              <div class="card-sub">Extend Jupiter Command</div>
+            </div>
+          </div>
+          <div class="card-body">Browse, install, and manage plugins from the marketplace or load local plugins from your filesystem.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── INTEGRATIONS ─────────────────── -->
+    <!-- Fusion Adapter -->
+    <section class="panel" id="panel-fusion">
+      <div class="page-header">
+        <div class="page-icon">⚙</div>
+        <div>
+          <div class="page-title">Fusion Adapter</div>
+          <div class="page-subtitle">Autodesk Fusion 360 Integration</div>
+        </div>
+      </div>
+      <div id="fusion-status" class="stat-row">
+        <div class="stat-box"><div class="stat-value" style="font-size:1.1rem"><span class="chip chip-warning">Disconnected</span></div><div class="stat-label">Connection</div></div>
+        <div class="stat-box"><div class="stat-value">—</div><div class="stat-label">Last Sync</div></div>
+        <div class="stat-box"><div class="stat-value">0</div><div class="stat-label">Imported Jobs</div></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🔗</span><div><div class="card-title">Connection Settings</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Fusion API Endpoint</label><input class="form-input" type="text" placeholder="https://developer.api.autodesk.com" /></div>
+            <div class="form-group"><label class="form-label">Client ID</label><input class="form-input" type="text" placeholder="Your Autodesk Client ID" /></div>
+            <div class="form-group"><label class="form-label">Client Secret</label><input class="form-input" type="password" placeholder="••••••••" /></div>
+            <button class="btn btn-primary" onclick="connectAdapter('fusion')">Connect</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📤</span><div><div class="card-title">Import Toolpath</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Fusion Project</label><select class="form-select"><option>— Select project —</option></select></div>
+            <div class="form-group"><label class="form-label">Setup</label><select class="form-select"><option>— Connect first —</option></select></div>
+            <button class="btn btn-outline" disabled>Import</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mastercam Adapter -->
+    <section class="panel" id="panel-mastercam">
+      <div class="page-header">
+        <div class="page-icon">⚙</div>
+        <div>
+          <div class="page-title">Mastercam Adapter</div>
+          <div class="page-subtitle">Mastercam X+ Integration via COM/API</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value"><span class="chip chip-warning">Disconnected</span></div><div class="stat-label">Connection</div></div>
+        <div class="stat-box"><div class="stat-value">—</div><div class="stat-label">Version Detected</div></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🔗</span><div><div class="card-title">Connection Settings</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Mastercam Install Path</label><input class="form-input" type="text" placeholder="C:\Program Files\Mastercam 2024" /></div>
+            <div class="form-group"><label class="form-label">COM Port / Named Pipe</label><input class="form-input" type="text" placeholder="MastercamAPI" /></div>
+            <button class="btn btn-primary" onclick="connectAdapter('mastercam')">Connect</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Supported Features</div></div></div>
+          <div class="card-body">
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+              <li>✔ &nbsp;Toolpath import/export</li>
+              <li>✔ &nbsp;Tool library sync</li>
+              <li>✔ &nbsp;Post-processor passthrough</li>
+              <li>✔ &nbsp;Stock model transfer</li>
+              <li>✖ &nbsp;Live simulation bridge (coming soon)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Siemens NX Adapter -->
+    <section class="panel" id="panel-nx">
+      <div class="page-header">
+        <div class="page-icon">⚙</div>
+        <div>
+          <div class="page-title">Siemens NX Adapter</div>
+          <div class="page-subtitle">NX CAM Integration via NX Open API</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value"><span class="chip chip-warning">Disconnected</span></div><div class="stat-label">Connection</div></div>
+        <div class="stat-box"><div class="stat-value">—</div><div class="stat-label">NX Version</div></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🔗</span><div><div class="card-title">Connection Settings</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">UGII_ROOT_DIR</label><input class="form-input" type="text" placeholder="C:\Siemens\NX 2312" /></div>
+            <div class="form-group"><label class="form-label">License Server</label><input class="form-input" type="text" placeholder="28000@license-server" /></div>
+            <button class="btn btn-primary" onclick="connectAdapter('nx')">Connect</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Supported Features</div></div></div>
+          <div class="card-body">
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+              <li>✔ &nbsp;NX Open journal export</li>
+              <li>✔ &nbsp;Operation template import</li>
+              <li>✔ &nbsp;Tooling database sync</li>
+              <li>✖ &nbsp;IPW transfer (roadmap)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GibbsCAM Adapter -->
+    <section class="panel" id="panel-gibbscam">
+      <div class="page-header">
+        <div class="page-icon">⚙</div>
+        <div>
+          <div class="page-title">GibbsCAM Adapter</div>
+          <div class="page-subtitle">GibbsCAM Integration via SDK</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value"><span class="chip chip-warning">Disconnected</span></div><div class="stat-label">Connection</div></div>
+        <div class="stat-box"><div class="stat-value">—</div><div class="stat-label">SDK Version</div></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🔗</span><div><div class="card-title">Connection Settings</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">GibbsCAM SDK Path</label><input class="form-input" type="text" placeholder="C:\Program Files\GibbsCAM" /></div>
+            <button class="btn btn-primary" onclick="connectAdapter('gibbscam')">Connect</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Supported Features</div></div></div>
+          <div class="card-body">
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+              <li>✔ &nbsp;Process plan export</li>
+              <li>✔ &nbsp;Multi-task turning support</li>
+              <li>✔ &nbsp;Tool library sync</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SolidCAM Adapter -->
+    <section class="panel" id="panel-solidcam">
+      <div class="page-header">
+        <div class="page-icon">⚙</div>
+        <div>
+          <div class="page-title">SolidCAM Adapter</div>
+          <div class="page-subtitle">SolidCAM / iMachining Integration</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value"><span class="chip chip-warning">Disconnected</span></div><div class="stat-label">Connection</div></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🔗</span><div><div class="card-title">Connection Settings</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">SolidCAM Installation Path</label><input class="form-input" type="text" placeholder="C:\Program Files\SolidCAM 2024" /></div>
+            <button class="btn btn-primary" onclick="connectAdapter('solidcam')">Connect</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Supported Features</div></div></div>
+          <div class="card-body">
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+              <li>✔ &nbsp;iMachining parameter sync</li>
+              <li>✔ &nbsp;Toolpath XML export</li>
+              <li>✔ &nbsp;SolidWorks assembly support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Creo Adapter -->
+    <section class="panel" id="panel-creo">
+      <div class="page-header">
+        <div class="page-icon">⚙</div>
+        <div>
+          <div class="page-title">Creo Adapter</div>
+          <div class="page-subtitle">PTC Creo NC Integration via J-Link / Web API</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value"><span class="chip chip-warning">Disconnected</span></div><div class="stat-label">Connection</div></div>
+        <div class="stat-box"><div class="stat-value">—</div><div class="stat-label">Creo Version</div></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🔗</span><div><div class="card-title">Connection Settings</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Creo WebAPI Host</label><input class="form-input" type="text" placeholder="http://localhost:9056" /></div>
+            <button class="btn btn-primary" onclick="connectAdapter('creo')">Connect</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Supported Features</div></div></div>
+          <div class="card-body">
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+              <li>✔ &nbsp;NC sequence import</li>
+              <li>✔ &nbsp;Tool definition sync</li>
+              <li>✔ &nbsp;Step model export</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Adapter API -->
+    <section class="panel" id="panel-custom-api">
+      <div class="page-header">
+        <div class="page-icon">🛠</div>
+        <div>
+          <div class="page-title">Custom Adapter API</div>
+          <div class="page-subtitle">Build your own CAM integration</div>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📖</span><div><div class="card-title">API Reference</div></div></div>
+          <div class="card-body">
+            Implement the <code style="color:var(--accent)">IJupiterAdapter</code> interface to create custom CAM integrations. Adapters are loaded as CommonJS modules.
+            <pre style="margin-top:12px;background:var(--bg-deep);border:1px solid var(--border);border-radius:4px;padding:10px;font-size:0.78rem;overflow-x:auto;color:var(--text-muted)">module.exports = {
+  name: 'MyCAM',
+  version: '1.0.0',
+  connect(config) { ... },
+  importJob(id)   { ... },
+  exportJob(job)  { ... },
+  getTools()      { ... }
+};</pre>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📂</span><div><div class="card-title">Load Local Adapter</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Adapter Module Path</label><input class="form-input" type="text" placeholder="/path/to/my-adapter.js" /></div>
+            <div class="form-group"><label class="form-label">Adapter Name (display)</label><input class="form-input" type="text" placeholder="My Custom CAM" /></div>
+            <button class="btn btn-primary">Load Adapter</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── AI ASSISTANT ─────────────────── -->
+    <section class="panel" id="panel-ai-assistant">
+      <div class="page-header">
+        <div class="page-icon">🤖</div>
+        <div>
+          <div class="page-title">AI Assistant</div>
+          <div class="page-subtitle">Natural language CAM commands &amp; advice</div>
+        </div>
+      </div>
+
+      <div id="chat-window" role="log" aria-live="polite"></div>
+
+      <div class="chat-input-row">
+        <input class="form-input" type="text" id="chat-input" placeholder="Ask anything about CAM, toolpaths, feeds &amp; speeds…" autocomplete="off" />
+        <button class="btn btn-primary" id="chat-send">Send</button>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="nav-section-label" style="padding:0 0 10px">Quick prompts</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px" id="quick-prompts">
+          <button class="btn btn-outline btn-sm" data-prompt="Suggest optimal feed and speed for 6061 aluminum with a 6mm end mill.">Feeds &amp; Speeds — 6061 Al</button>
+          <button class="btn btn-outline btn-sm" data-prompt="What is the best toolpath strategy for a deep pocket in steel?">Deep Pocket Strategy</button>
+          <button class="btn btn-outline btn-sm" data-prompt="How do I reduce chatter when milling thin walls?">Reduce Chatter</button>
+          <button class="btn btn-outline btn-sm" data-prompt="Explain adaptive clearing vs conventional milling.">Adaptive Clearing</button>
+          <button class="btn btn-outline btn-sm" data-prompt="What finishing strategy minimizes scallop height on a curved surface?">Surface Finishing</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── TOOLPATH ANALYSIS ────────────── -->
+    <section class="panel" id="panel-toolpath">
+      <div class="page-header">
+        <div class="page-icon">📐</div>
+        <div>
+          <div class="page-title">Toolpath Analysis</div>
+          <div class="page-subtitle">Inspect, validate, and optimize NC toolpaths</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value" id="tp-moves">—</div><div class="stat-label">Total Moves</div></div>
+        <div class="stat-box"><div class="stat-value" id="tp-dist">—</div><div class="stat-label">Path Length (mm)</div></div>
+        <div class="stat-box"><div class="stat-value" id="tp-time">—</div><div class="stat-label">Est. Cycle Time</div></div>
+        <div class="stat-box"><div class="stat-value" id="tp-issues">—</div><div class="stat-label">Issues Found</div></div>
+      </div>
+
+      <div id="tp-canvas">
+        <svg width="100%" height="100%" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet" id="tp-svg"></svg>
+        <span id="tp-placeholder">Load an NC file to begin analysis</span>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📂</span><div><div class="card-title">Load NC File</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">NC / G-code File</label><input class="form-input" type="file" accept=".nc,.tap,.gcode,.txt,.cnc" id="nc-file-input" /></div>
+            <button class="btn btn-primary" id="analyze-btn">Analyze Toolpath</button>
+          </div>
+        </div>
+        <div class="card" id="tp-results-card" style="display:none">
+          <div class="card-header"><span class="card-icon">📊</span><div><div class="card-title">Analysis Report</div></div></div>
+          <div class="card-body" id="tp-report"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── JOB LIBRARY ──────────────────── -->
+    <section class="panel" id="panel-job-library">
+      <div class="page-header">
+        <div class="page-icon">📁</div>
+        <div>
+          <div class="page-title">Job Library</div>
+          <div class="page-subtitle">Manage saved machining jobs</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-bottom:16px;align-items:center;flex-wrap:wrap">
+        <input class="form-input" type="text" placeholder="Search jobs…" id="job-search" style="flex:1;min-width:200px" />
+        <button class="btn btn-primary" id="add-job-btn">+ New Job</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="job-table">
+          <thead>
+            <tr>
+              <th>Job Name</th>
+              <th>Source</th>
+              <th>Material</th>
+              <th>Operations</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="job-tbody">
+            <tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:24px">No jobs yet. Import from an adapter or add a new job.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Add Job Modal overlay (inline) -->
+      <div id="job-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center">
+        <div class="card" style="width:420px;max-width:92vw">
+          <div class="card-header"><span class="card-icon">📁</span><div><div class="card-title">New Job</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Job Name</label><input class="form-input" type="text" id="jm-name" placeholder="Part-001" /></div>
+            <div class="form-group"><label class="form-label">Source CAM</label>
+              <select class="form-select" id="jm-source">
+                <option>Fusion 360</option><option>Mastercam</option><option>Siemens NX</option>
+                <option>GibbsCAM</option><option>SolidCAM</option><option>Creo</option><option>Manual</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Material</label><input class="form-input" type="text" id="jm-material" placeholder="6061 Aluminum" /></div>
+            <div class="form-group"><label class="form-label">Operations (comma-separated)</label><input class="form-input" type="text" id="jm-ops" placeholder="Rough, Finish, Drill" /></div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-primary" id="jm-save">Save Job</button>
+              <button class="btn btn-outline" id="jm-cancel">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── MACHINE PROFILES ─────────────── -->
+    <section class="panel" id="panel-machine-profiles">
+      <div class="page-header">
+        <div class="page-icon">🏭</div>
+        <div>
+          <div class="page-title">Machine Profiles</div>
+          <div class="page-subtitle">Define and manage CNC machine configurations</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-bottom:16px;align-items:center">
+        <button class="btn btn-primary" id="add-machine-btn">+ New Profile</button>
+      </div>
+
+      <div class="grid" id="machine-grid">
+        <div style="color:var(--text-muted);font-size:0.85rem;grid-column:1/-1;padding:20px 0">No machine profiles defined. Add your first machine.</div>
+      </div>
+
+      <!-- Add Machine Modal -->
+      <div id="machine-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center">
+        <div class="card" style="width:480px;max-width:92vw">
+          <div class="card-header"><span class="card-icon">🏭</span><div><div class="card-title">New Machine Profile</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Machine Name</label><input class="form-input" type="text" id="mm-name" placeholder="Haas VF-2" /></div>
+            <div class="form-group"><label class="form-label">Type</label>
+              <select class="form-select" id="mm-type">
+                <option>3-Axis VMC</option><option>4-Axis VMC</option><option>5-Axis VMC</option>
+                <option>Lathe</option><option>Mill-Turn</option><option>Swiss Lathe</option><option>EDM</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Max Spindle Speed (RPM)</label><input class="form-input" type="number" id="mm-rpm" placeholder="10000" /></div>
+            <div class="form-group"><label class="form-label">Max Feed Rate (mm/min)</label><input class="form-input" type="number" id="mm-feed" placeholder="15000" /></div>
+            <div class="form-group"><label class="form-label">Controller</label>
+              <select class="form-select" id="mm-ctrl">
+                <option>Fanuc 0i-MF</option><option>Fanuc 31i</option><option>Siemens 840D</option>
+                <option>Heidenhain iTNC</option><option>Mazatrol</option><option>Other</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-primary" id="mm-save">Save Profile</button>
+              <button class="btn btn-outline" id="mm-cancel">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── SIMULATION ───────────────────── -->
+    <section class="panel" id="panel-simulation">
+      <div class="page-header">
+        <div class="page-icon">🎮</div>
+        <div>
+          <div class="page-title">Simulation</div>
+          <div class="page-subtitle">3-axis stock removal preview</div>
+        </div>
+      </div>
+
+      <div id="sim-viewport">
+        <div class="sim-grid"></div>
+        <div class="sim-label">
+          <div style="font-size:2.5rem;margin-bottom:8px">🎮</div>
+          <div>Load a job from the Job Library to run simulation.</div>
+          <div style="margin-top:6px;font-size:0.75rem">Requires a connected CAM adapter for full 3D preview.</div>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">⚙</span><div><div class="card-title">Simulation Settings</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Job</label><select class="form-select" id="sim-job-select"><option>— No jobs in library —</option></select></div>
+            <div class="form-group"><label class="form-label">Speed</label>
+              <select class="form-select">
+                <option>1× — Real time</option><option selected>5× — Fast</option><option>10× — Very fast</option><option>Max</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Stock Display</label>
+              <select class="form-select"><option>Solid</option><option>Wireframe</option><option>Transparent</option></select>
+            </div>
+            <button class="btn btn-primary" id="sim-play-btn">▶ Run Simulation</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📊</span><div><div class="card-title">Collision Report</div></div></div>
+          <div class="card-body" id="sim-report" style="color:var(--text-muted)">Run a simulation to generate a collision report.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── AUTOMATION ENGINE ────────────── -->
+    <section class="panel" id="panel-automation">
+      <div class="page-header">
+        <div class="page-icon">⚡</div>
+        <div>
+          <div class="page-title">Automation Engine</div>
+          <div class="page-subtitle">Rules-based CAM workflow automation</div>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-bottom:24px">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Automation Workflows</div></div></div>
+          <div class="card-body" id="automation-list">
+            <div style="color:var(--text-muted);font-size:0.85rem">No workflows configured. Create one below.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-icon">➕</span><div><div class="card-title">New Workflow</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Workflow Name</label><input class="form-input" type="text" id="aw-name" placeholder="Auto Rough Pocket" /></div>
+            <div class="form-group"><label class="form-label">Trigger</label>
+              <select class="form-select" id="aw-trigger">
+                <option>On file import</option><option>On feature recognition</option><option>Manual</option><option>Scheduled</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Action</label>
+              <select class="form-select" id="aw-action">
+                <option>Apply roughing template</option><option>Apply finishing template</option>
+                <option>Generate NC file</option><option>Send to Job Library</option>
+                <option>Run post-processor</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="aw-save">Create Workflow</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="card-icon">🔄</span><div><div class="card-title">How the Automation Engine Works</div></div></div>
+        <div class="card-body">
+          <div class="flow-step">
+            <div class="flow-num">1</div>
+            <div class="flow-body">
+              <div class="flow-title">Trigger Detection</div>
+              <div class="flow-desc">Monitor CAM adapters and the Job Library for configured trigger events.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">2</div>
+            <div class="flow-body">
+              <div class="flow-title">Feature Recognition</div>
+              <div class="flow-desc">Identify pockets, holes, faces, and other machinable features automatically.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">3</div>
+            <div class="flow-body">
+              <div class="flow-title">Template Application</div>
+              <div class="flow-desc">Apply saved toolpath templates with matched tools, feeds, and speeds.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">4</div>
+            <div class="flow-body">
+              <div class="flow-title">NC Output</div>
+              <div class="flow-desc">Run the post-processor and deliver the NC file to the target machine.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── PLUGIN MANAGER ───────────────── -->
+    <section class="panel" id="panel-plugins">
+      <div class="page-header">
+        <div class="page-icon">🧩</div>
+        <div>
+          <div class="page-title">Plugin Manager</div>
+          <div class="page-subtitle">Browse, install, and manage Jupiter Command plugins</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-bottom:20px;align-items:center;flex-wrap:wrap">
+        <input class="form-input" type="text" placeholder="Search plugins…" id="plugin-search" style="flex:1;min-width:200px" />
+        <button class="btn btn-outline btn-sm" onclick="loadLocalPlugin()">📂 Load Local Plugin</button>
+      </div>
+
+      <div class="grid" id="plugin-grid"></div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
