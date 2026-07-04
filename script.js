@@ -666,19 +666,78 @@ function renderBarChart(containerId, values, color) {
 
 // ── Donations ─────────────────────────────────────────────────
 
-function copyWallet() {
-  const addr = document.getElementById('wallet-addr');
-  if (!addr) return;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(addr.textContent.trim()).then(() => {
-      alert('Wallet address copied to clipboard!');
-    }).catch(() => fallbackCopy(addr.textContent.trim()));
-  } else {
-    fallbackCopy(addr.textContent.trim());
+const WALLET_ADDRESS = '7mWvKtzKvXzupqBaMYLo2Q7uzcXiEdfdMWgG6N12eEah';
+let selectedDonationAmount = null;
+
+function selectDonationAmount(amount) {
+  selectedDonationAmount = amount;
+
+  // Highlight selected preset button
+  document.querySelectorAll('.donation-preset').forEach(btn => {
+    const label = btn.textContent.replace(/[^0-9,]/g, '').replace(',', '');
+    btn.classList.toggle('btn-primary', parseInt(label, 10) === amount);
+    btn.classList.toggle('btn-outline', parseInt(label, 10) !== amount);
+  });
+
+  // Build Solana Pay URL (USDC on Solana for a stable USD-denominated amount)
+  // SPL-token mint for USDC on Solana mainnet
+  const usdcMint   = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+  const label      = encodeURIComponent('Jupiter Command Donation');
+  const message    = encodeURIComponent('Thank you for supporting the mission!');
+  const solanaPayUrl = 'solana:' + WALLET_ADDRESS
+    + '?amount=' + amount
+    + '&spl-token=' + usdcMint
+    + '&label=' + label
+    + '&message=' + message;
+
+  // Update the "Open in Wallet" link
+  const payLink = document.getElementById('solana-pay-link');
+  if (payLink) {
+    payLink.href = solanaPayUrl;
+    payLink.style.display = '';
+  }
+
+  // Show amount note
+  const note = document.getElementById('donation-amount-note');
+  if (note) {
+    note.style.display = '';
+    note.innerHTML = '<strong>$' + amount.toLocaleString() + ' USDC selected.</strong> '
+      + 'Click <em>Open in Wallet</em> to launch your Solana wallet with the amount pre-filled, '
+      + 'or copy the address below and send manually.';
   }
 }
 
-function fallbackCopy(text) {
+function openSolanaPay(e) {
+  const href = e.currentTarget.href;
+  if (!href || href === '#') { e.preventDefault(); return; }
+  // Let the browser handle the solana: URI natively; fall back gracefully
+  try {
+    window.location.href = href;
+  } catch (_) {
+    e.preventDefault();
+    alert('Open your Solana wallet app and send $' + (selectedDonationAmount || '').toLocaleString()
+      + ' USDC to:\n' + WALLET_ADDRESS);
+  }
+  e.preventDefault();
+}
+
+function copyWallet() {
+  const addr = document.getElementById('wallet-addr');
+  if (!addr) return;
+  const text = addr.textContent.trim();
+  const msg  = selectedDonationAmount
+    ? 'Wallet address copied! Send $' + selectedDonationAmount.toLocaleString() + ' USDC to this address.'
+    : 'Wallet address copied to clipboard!';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      alert(msg);
+    }).catch(() => fallbackCopy(text, msg));
+  } else {
+    fallbackCopy(text, msg);
+  }
+}
+
+function fallbackCopy(text, msg) {
   const ta = document.createElement('textarea');
   ta.value = text;
   ta.style.position = 'fixed';
@@ -687,7 +746,7 @@ function fallbackCopy(text) {
   ta.select();
   document.execCommand('copy');
   document.body.removeChild(ta);
-  alert('Wallet address copied!');
+  alert(msg || 'Wallet address copied!');
 }
 
 // ── Bootstrap ─────────────────────────────────────────────────
