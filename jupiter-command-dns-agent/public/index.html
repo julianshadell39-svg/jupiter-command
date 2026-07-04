@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jupiter Command – DNS Agent</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0e1a;
+      color: #e0e6f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #7ecfff;
+      letter-spacing: 0.05em;
+    }
+
+    header p {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: #8899bb;
+    }
+
+    #status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .card {
+      background: #121828;
+      border: 1px solid #1e2d45;
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      word-break: break-all;
+      color: #c8d8f0;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge.ok   { background: #0d4f30; color: #4dff9e; }
+    .badge.fail { background: #4f1010; color: #ff6b6b; }
+    .badge.pending { background: #2a2a00; color: #ffd966; }
+
+    .card .records {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: #7a8fab;
+      line-height: 1.6;
+    }
+
+    .card .timestamp {
+      margin-top: 0.6rem;
+      font-size: 0.72rem;
+      color: #445566;
+    }
+
+    #refresh-btn {
+      margin-bottom: 1.5rem;
+      padding: 0.55rem 1.4rem;
+      background: #1a3560;
+      color: #7ecfff;
+      border: 1px solid #2a5090;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    #refresh-btn:hover { background: #204070; }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      color: #445566;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛰 Jupiter Command – DNS Agent</h1>
+    <p>DNSSEC health monitor for platform domains</p>
+  </header>
+
+  <button id="refresh-btn">↻ Refresh</button>
+
+  <div id="status-grid">
+    <div class="card">
+      <h2>Loading…</h2>
+      <span class="badge pending">pending</span>
+    </div>
+  </div>
+
+  <footer>Auto-refreshes every 60 s &nbsp;|&nbsp; Jupiter Command DNS Agent</footer>
+
+  <script>
+    async function fetchStatus() {
+      const grid = document.getElementById('status-grid');
+      try {
+        const res = await fetch('/api/status');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const { domains } = await res.json();
+
+        if (!domains || domains.length === 0) {
+          grid.innerHTML = '<div class="card"><h2>No domains configured.</h2></div>';
+          return;
+        }
+
+        grid.innerHTML = domains.map(d => `
+          <div class="card">
+            <h2>${escapeHtml(d.domain)}</h2>
+            <span class="badge ${d.valid ? 'ok' : 'fail'}">
+              ${d.valid ? '✔ valid' : '✘ invalid'}
+            </span>
+            <div class="records">
+              ${d.records.length ? d.records.map(r => escapeHtml(r)).join('<br>') : (d.error ? escapeHtml(d.error) : '—')}
+            </div>
+            <div class="timestamp">Checked: ${d.checkedAt ? new Date(d.checkedAt).toLocaleString() : '—'}</div>
+          </div>
+        `).join('');
+      } catch (err) {
+        grid.innerHTML = `<div class="card"><h2>Error loading status</h2><div class="records">${escapeHtml(err.message)}</div></div>`;
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    document.getElementById('refresh-btn').addEventListener('click', fetchStatus);
+    fetchStatus();
+    setInterval(fetchStatus, 60000);
+  </script>
+</body>
+</html>

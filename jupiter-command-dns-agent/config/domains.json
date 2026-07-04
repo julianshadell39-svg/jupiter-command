@@ -1,0 +1,9 @@
+{
+  "pollIntervalSeconds": 300,
+  "domains": [
+    "jup.ag",
+    "jupiter.exchange",
+    "howtogiveback.org",
+    "solana.com"
+  ]
+}

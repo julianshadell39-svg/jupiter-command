@@ -1,0 +1,15 @@
+{
+  "name": "jupiter-command-dns-agent",
+  "version": "1.0.0",
+  "description": "DNSSEC monitoring agent for Jupiter Command DeFi platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["dns", "dnssec", "jupiter", "solana", "defi", "monitoring"],
+  "author": "Jupiter Command",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
