@@ -77,9 +77,12 @@ burger && burger.addEventListener('click', () => sidebar.classList.toggle('open'
 // ── Dashboard stats (reactive) ────────────────────────────────
 
 function refreshDashboardStats() {
-  document.getElementById('stat-jobs').textContent     = jobs.length;
-  document.getElementById('stat-machines').textContent = machines.length;
-  document.getElementById('stat-plugins').textContent  = plugins.filter(p => p.active).length;
+  const statJobs = document.getElementById('stat-jobs');
+  const statPlugins = document.getElementById('stat-plugins');
+  const agentCamJobs = document.getElementById('agent-cam-jobs');
+  if (statJobs)     statJobs.textContent     = jobs.length;
+  if (statPlugins)  statPlugins.textContent  = plugins.filter(p => p.active).length;
+  if (agentCamJobs) agentCamJobs.textContent = jobs.length;
 }
 
 // ── Adapter connect simulation ────────────────────────────────
@@ -553,11 +556,146 @@ function escHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
+// ── Missions ──────────────────────────────────────────────────
+
+function openMissionModal() {
+  document.getElementById('mission-modal').style.display = 'flex';
+}
+
+function closeMissionModal() {
+  document.getElementById('mission-modal').style.display = 'none';
+}
+
+function saveMission() {
+  const name   = document.getElementById('nm-name').value.trim();
+  const type   = document.getElementById('nm-type').value;
+  const agents = document.getElementById('nm-agents').value.trim();
+
+  if (!name) { alert('Please enter a mission name.'); return; }
+
+  const tbody = document.getElementById('mission-tbody');
+  if (tbody) {
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + escHtml(name) + '</td>' +
+      '<td>' + escHtml(type) + '</td>' +
+      '<td>' + escHtml(agents || '—') + '</td>' +
+      '<td><span class="chip chip-warning">Planning</span></td>' +
+      '<td><div class="progress-bar" style="width:160px"><div class="progress-fill" style="width:5%;background:var(--warning)"></div></div></td>';
+    tbody.appendChild(tr);
+  }
+
+  document.getElementById('nm-name').value   = '';
+  document.getElementById('nm-agents').value = '';
+  closeMissionModal();
+}
+
+// ── Agents ────────────────────────────────────────────────────
+
+function restartAgent(name) {
+  alert('Restarting ' + name + '…\nAgent will reconnect automatically within 10 seconds.');
+}
+
+function agentSync(name) {
+  alert(name + ': Sync initiated. Changes will appear within 30 seconds.');
+}
+
+// ── AI Command Center ─────────────────────────────────────────
+
+function addTaskToQueue() {
+  const list  = document.getElementById('task-queue-list');
+  const count = document.getElementById('aicc-queued');
+  if (!list) return;
+
+  const n = list.querySelectorAll('.flow-step').length + 1;
+  const div = document.createElement('div');
+  div.className = 'flow-step';
+  div.innerHTML =
+    '<div class="flow-num">' + n + '</div>' +
+    '<div class="flow-body">' +
+      '<div class="flow-title">Manual Task <span class="chip chip-warning" style="font-size:0.65rem">Pending</span></div>' +
+      '<div class="flow-desc">Added manually · ' + new Date().toLocaleTimeString() + '</div>' +
+    '</div>';
+  list.appendChild(div);
+
+  if (count) count.textContent = String(n);
+}
+
+function clearQueue() {
+  const list  = document.getElementById('task-queue-list');
+  const count = document.getElementById('aicc-queued');
+  if (list)  list.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem">Queue is empty.</div>';
+  if (count) count.textContent = '0';
+}
+
+function triggerGithubSync() {
+  const rows = document.querySelectorAll('#panel-ai-command .dash-row');
+  rows.forEach(r => {
+    const chip = r.querySelector('.chip');
+    if (chip && chip.textContent.includes('Syncing')) {
+      chip.className = 'chip chip-success';
+      chip.textContent = 'In Sync';
+    }
+  });
+  alert('GitHub sync triggered. All repositories will be updated within 60 seconds.');
+}
+
+// ── DNS Monitor ───────────────────────────────────────────────
+
+function runDNSCheck(domain) {
+  alert('Running DNSSEC verification for ' + domain + '…\n\nAll records validated. DNSSEC: ✅ Verified | SSL: ✅ Active');
+}
+
+// ── Analytics charts ──────────────────────────────────────────
+
+function renderAnalyticsCharts() {
+  renderBarChart('bars-donations',  [320,410,280,520,480,600,420,390,540,720,610,680], 'var(--warning)');
+  renderBarChart('bars-volunteers', [8,12,6,15,10,18,22,14,19,25,21,28], 'var(--accent)');
+  renderBarChart('bars-outreach',   [180,220,195,310,280,420,350,390,480,520,460,560], 'var(--success)');
+}
+
+function renderBarChart(containerId, values, color) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const max = Math.max(...values);
+  el.innerHTML = values.map(v => {
+    const h = Math.round((v / max) * 90);
+    return '<div class="chart-bar" style="height:' + h + 'px;background:' + color + '" title="' + v + '"></div>';
+  }).join('');
+}
+
+// ── Donations ─────────────────────────────────────────────────
+
+function copyWallet() {
+  const addr = document.getElementById('wallet-addr');
+  if (!addr) return;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(addr.textContent.trim()).then(() => {
+      alert('Wallet address copied to clipboard!');
+    }).catch(() => fallbackCopy(addr.textContent.trim()));
+  } else {
+    fallbackCopy(addr.textContent.trim());
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity  = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  alert('Wallet address copied!');
+}
+
 // ── Bootstrap ─────────────────────────────────────────────────
 
 (function init() {
   renderPlugins(plugins);
   refreshDashboardStats();
   refreshSimJobSelect();
+  renderAnalyticsCharts();
   showPanel('dashboard');
 })();

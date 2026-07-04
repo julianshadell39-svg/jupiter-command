@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jupiter Command — CAM Command Center</title>
+  <title>Jupiter Command — Mission Control</title>
   <link rel="icon" type="image/svg+xml" href="./arohm-icon.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -18,7 +18,7 @@
     <img src="./arohm-icon.svg" alt="Jupiter Command logo" />
     <div>
       <div class="logo-text">Jupiter Command</div>
-      <div class="logo-sub">CAM Command Center</div>
+      <div class="logo-sub">Mission Control</div>
     </div>
   </a>
   <div class="spacer"></div>
@@ -97,6 +97,46 @@
       </div>
     </div>
 
+    <div class="nav-section">
+      <div class="nav-section-label">Command</div>
+      <div class="nav-item" data-nav="missions">
+        <span class="nav-icon">🚀</span>
+        <span class="nav-label">Missions</span>
+      </div>
+      <div class="nav-item" data-nav="agents">
+        <span class="nav-icon">🤖</span>
+        <span class="nav-label">Agents</span>
+      </div>
+      <div class="nav-item" data-nav="analytics">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Analytics</span>
+      </div>
+      <div class="nav-item" data-nav="ai-command">
+        <span class="nav-icon">🧠</span>
+        <span class="nav-label">AI Command Center</span>
+      </div>
+      <div class="nav-item" data-nav="dns-monitor">
+        <span class="nav-icon">🌐</span>
+        <span class="nav-label">DNS Monitor</span>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Organization</div>
+      <div class="nav-item" data-nav="arohm">
+        <span class="nav-icon">🌍</span>
+        <span class="nav-label">AROHM Projects</span>
+      </div>
+      <div class="nav-item" data-nav="howigiveback">
+        <span class="nav-icon">💚</span>
+        <span class="nav-label">HowIGiveBack</span>
+      </div>
+      <div class="nav-item" data-nav="donations">
+        <span class="nav-icon">💛</span>
+        <span class="nav-label">Donations</span>
+      </div>
+    </div>
+
   </nav>
 
   <!-- ── Main panels ──────────────────────────────────────── -->
@@ -108,94 +148,168 @@
         <div class="page-icon">⬡</div>
         <div>
           <div class="page-title">Dashboard</div>
-          <div class="page-subtitle">Jupiter Command Overview</div>
+          <div class="page-subtitle">Jupiter Command — Mission Control Overview</div>
         </div>
       </div>
 
       <div class="stat-row">
         <div class="stat-box">
+          <div class="stat-value" id="stat-agents-online">5</div>
+          <div class="stat-label">Agents Online</div>
+        </div>
+        <div class="stat-box">
           <div class="stat-value">7</div>
-          <div class="stat-label">Adapters Connected</div>
+          <div class="stat-label">CAM Adapters</div>
         </div>
         <div class="stat-box">
           <div class="stat-value" id="stat-jobs">0</div>
           <div class="stat-label">Jobs in Library</div>
         </div>
         <div class="stat-box">
-          <div class="stat-value" id="stat-machines">0</div>
-          <div class="stat-label">Machine Profiles</div>
-        </div>
-        <div class="stat-box">
           <div class="stat-value" id="stat-plugins">0</div>
           <div class="stat-label">Active Plugins</div>
         </div>
+        <div class="stat-box">
+          <div class="stat-value" style="color:var(--success)">✅</div>
+          <div class="stat-label">DNS Status</div>
+        </div>
       </div>
 
-      <div class="grid">
-        <div class="card" style="cursor:pointer" data-nav="integrations-parent">
-          <div class="card-header">
-            <span class="card-icon">🔌</span>
-            <div>
-              <div class="card-title">Integrations</div>
-              <div class="card-sub">7 CAM adapters available</div>
-            </div>
-          </div>
-          <div class="card-body">Connect to Fusion 360, Mastercam, Siemens NX, GibbsCAM, SolidCAM, Creo, or build your own with the Custom Adapter API.</div>
-        </div>
-
-        <div class="card" style="cursor:pointer" data-nav="ai-assistant">
+      <!-- Top row: Agents + AROHM + HowIGiveBack -->
+      <div class="db-triple-grid" style="margin-bottom:16px">
+        <div class="card" style="cursor:pointer" data-nav="agents">
           <div class="card-header">
             <span class="card-icon">🤖</span>
             <div>
-              <div class="card-title">AI Assistant</div>
-              <div class="card-sub">Natural language CAM commands</div>
+              <div class="card-title">Active Agents</div>
+              <div class="card-sub">5 agents running</div>
             </div>
           </div>
-          <div class="card-body">Ask questions, generate toolpaths, optimize feeds &amp; speeds, and troubleshoot machining problems with the AI assistant.</div>
+          <div class="card-body">
+            <ul class="dash-list">
+              <li><span class="dot-online"></span>DNSSEC Agent</li>
+              <li><span class="dot-online"></span>GitHub Agent</li>
+              <li><span class="dot-online"></span>Workflow Agent</li>
+              <li><span class="dot-online"></span>Payment Agent</li>
+              <li><span class="dot-online"></span>CAD Agent</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="card" style="cursor:pointer" data-nav="toolpath">
+        <div class="card" style="cursor:pointer" data-nav="arohm">
           <div class="card-header">
-            <span class="card-icon">📐</span>
+            <span class="card-icon">🌍</span>
             <div>
-              <div class="card-title">Toolpath Analysis</div>
-              <div class="card-sub">Inspect and validate toolpaths</div>
+              <div class="card-title">AROHM Projects</div>
+              <div class="card-sub">arohm.org</div>
             </div>
           </div>
-          <div class="card-body">Visualize and analyze generated toolpaths, detect collisions, optimize cycle times, and review step-overs.</div>
+          <div class="card-body">
+            <ul class="dash-list">
+              <li>📦 Community Aid</li>
+              <li>📢 Outreach</li>
+              <li>📚 Education</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="card" style="cursor:pointer" data-nav="simulation">
+        <div class="card" style="cursor:pointer" data-nav="howigiveback">
           <div class="card-header">
-            <span class="card-icon">🎮</span>
+            <span class="card-icon">💚</span>
             <div>
-              <div class="card-title">Simulation</div>
-              <div class="card-sub">3-axis material removal preview</div>
+              <div class="card-title">HowIGiveBack</div>
+              <div class="card-sub">howtogiveback.org</div>
             </div>
           </div>
-          <div class="card-body">Run full stock-removal simulation before cutting. Detect gouges, residual stock, and verify tolerances.</div>
+          <div class="card-body">
+            <ul class="dash-list">
+              <li>🙌 Volunteer Portal</li>
+              <li>💛 Donations</li>
+              <li>📅 Events</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mid row: AI Command Center + Analytics -->
+      <div class="db-half-grid" style="margin-bottom:16px">
+        <div class="card" style="cursor:pointer" data-nav="ai-command">
+          <div class="card-header">
+            <span class="card-icon">🧠</span>
+            <div>
+              <div class="card-title">AI Command Center</div>
+              <div class="card-sub">ALFRED — Autonomous Intelligence</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>Agent Status</span><span class="chip chip-success">All Clear</span></div>
+            <div class="dash-row"><span>Task Queue</span><span class="chip chip-info">3 Pending</span></div>
+            <div class="dash-row"><span>Workflow Engine</span><span class="chip chip-success">Running</span></div>
+            <div class="dash-row"><span>GitHub Sync</span><span class="chip chip-success">In Sync</span></div>
+            <div class="dash-row"><span>MCP Servers</span><span class="chip chip-success">Online</span></div>
+          </div>
         </div>
 
-        <div class="card" style="cursor:pointer" data-nav="automation">
+        <div class="card" style="cursor:pointer" data-nav="analytics">
           <div class="card-header">
-            <span class="card-icon">⚡</span>
+            <span class="card-icon">📊</span>
             <div>
-              <div class="card-title">Automation Engine</div>
-              <div class="card-sub">Rules-based CAM workflows</div>
+              <div class="card-title">Live Analytics</div>
+              <div class="card-sub">Real-time mission metrics</div>
             </div>
           </div>
-          <div class="card-body">Automate repetitive CAM tasks: feature recognition, template application, post-processing, and NC output.</div>
+          <div class="card-body">
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-label"><span>💛 Donations</span><span>$4,820</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:72%;background:var(--warning)"></div></div>
+            </div>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-label"><span>🙌 Volunteers</span><span>138</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+            </div>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-label"><span>📢 Outreach</span><span>2.4K</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:88%;background:var(--success)"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom row: CAM shortcuts + Activity Feed -->
+      <div class="db-half-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🏭</span>
+            <div>
+              <div class="card-title">CAM Manufacturing</div>
+              <div class="card-sub">7 adapters connected</div>
+            </div>
+          </div>
+          <div class="card-body" style="display:flex;flex-wrap:wrap;gap:8px">
+            <button class="btn btn-outline btn-sm" onclick="showPanel('fusion')">Fusion 360</button>
+            <button class="btn btn-outline btn-sm" onclick="showPanel('mastercam')">Mastercam</button>
+            <button class="btn btn-outline btn-sm" onclick="showPanel('nx')">Siemens NX</button>
+            <button class="btn btn-outline btn-sm" onclick="showPanel('gibbscam')">GibbsCAM</button>
+            <button class="btn btn-outline btn-sm" onclick="showPanel('creo')">Creo</button>
+            <button class="btn btn-outline btn-sm" onclick="showPanel('toolpath')">Toolpath Analysis</button>
+          </div>
         </div>
 
-        <div class="card" style="cursor:pointer" data-nav="plugins">
+        <div class="card">
           <div class="card-header">
-            <span class="card-icon">🧩</span>
+            <span class="card-icon">📡</span>
             <div>
-              <div class="card-title">Plugin Manager</div>
-              <div class="card-sub">Extend Jupiter Command</div>
+              <div class="card-title">Activity Feed</div>
+              <div class="card-sub">Recent system events</div>
             </div>
           </div>
-          <div class="card-body">Browse, install, and manage plugins from the marketplace or load local plugins from your filesystem.</div>
+          <div class="card-body" id="activity-feed">
+            <div class="activity-item"><span class="chip chip-success">DNS</span> arohm.org DNSSEC verified</div>
+            <div class="activity-item"><span class="chip chip-info">AGENT</span> GitHub Agent synced 3 repos</div>
+            <div class="activity-item"><span class="chip chip-success">AROHM</span> Community Aid event posted</div>
+            <div class="activity-item"><span class="chip chip-warning">QUEUE</span> Payment Agent: 2 tasks pending</div>
+            <div class="activity-item"><span class="chip chip-success">DNS</span> howigiveback.org SSL renewed</div>
+          </div>
         </div>
       </div>
     </section>
@@ -745,6 +859,645 @@
       </div>
 
       <div class="grid" id="plugin-grid"></div>
+    </section>
+
+    <!-- ─────────────────── MISSIONS ─────────────────────── -->
+    <section class="panel" id="panel-missions">
+      <div class="page-header">
+        <div class="page-icon">🚀</div>
+        <div>
+          <div class="page-title">Missions</div>
+          <div class="page-subtitle">Active &amp; planned Jupiter Command missions</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">3</div><div class="stat-label">Active Missions</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--warning)">2</div><div class="stat-label">In Planning</div></div>
+        <div class="stat-box"><div class="stat-value">12</div><div class="stat-label">Completed</div></div>
+        <div class="stat-box"><div class="stat-value">5</div><div class="stat-label">Agents Deployed</div></div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-bottom:16px;align-items:center;flex-wrap:wrap">
+        <input class="form-input" type="text" placeholder="Search missions…" id="mission-search" style="flex:1;min-width:200px" />
+        <button class="btn btn-primary" onclick="openMissionModal()">+ New Mission</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Mission</th><th>Type</th><th>Agents</th><th>Status</th><th>Progress</th></tr>
+          </thead>
+          <tbody id="mission-tbody">
+            <tr>
+              <td>Operation Arohm Outreach</td><td>Community</td><td>GitHub Agent, Workflow Agent</td>
+              <td><span class="chip chip-success">Active</span></td>
+              <td><div class="progress-bar" style="width:160px"><div class="progress-fill" style="width:68%"></div></div></td>
+            </tr>
+            <tr>
+              <td>DNS Hardening — arohm.org</td><td>Security</td><td>DNSSEC Agent</td>
+              <td><span class="chip chip-success">Active</span></td>
+              <td><div class="progress-bar" style="width:160px"><div class="progress-fill" style="width:100%;background:var(--success)"></div></div></td>
+            </tr>
+            <tr>
+              <td>HowIGiveBack Volunteer Drive</td><td>Fundraising</td><td>Payment Agent, Workflow Agent</td>
+              <td><span class="chip chip-success">Active</span></td>
+              <td><div class="progress-bar" style="width:160px"><div class="progress-fill" style="width:45%"></div></div></td>
+            </tr>
+            <tr>
+              <td>CAD Manufacturing Expansion</td><td>Engineering</td><td>CAD Agent</td>
+              <td><span class="chip chip-warning">Planning</span></td>
+              <td><div class="progress-bar" style="width:160px"><div class="progress-fill" style="width:20%;background:var(--warning)"></div></div></td>
+            </tr>
+            <tr>
+              <td>Compliance SOC2 Audit</td><td>Compliance</td><td>Workflow Agent</td>
+              <td><span class="chip chip-warning">Planning</span></td>
+              <td><div class="progress-bar" style="width:160px"><div class="progress-fill" style="width:10%;background:var(--warning)"></div></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- New Mission Modal -->
+      <div id="mission-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center">
+        <div class="card" style="width:460px;max-width:92vw">
+          <div class="card-header"><span class="card-icon">🚀</span><div><div class="card-title">New Mission</div></div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Mission Name</label><input class="form-input" type="text" id="nm-name" placeholder="Operation Alpha" /></div>
+            <div class="form-group"><label class="form-label">Type</label>
+              <select class="form-select" id="nm-type">
+                <option>Community</option><option>Security</option><option>Fundraising</option><option>Engineering</option><option>Compliance</option><option>Research</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Assigned Agents</label><input class="form-input" type="text" id="nm-agents" placeholder="e.g. GitHub Agent, DNSSEC Agent" /></div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-primary" onclick="saveMission()">Create Mission</button>
+              <button class="btn btn-outline" onclick="closeMissionModal()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── AGENTS ────────────────────────── -->
+    <section class="panel" id="panel-agents">
+      <div class="page-header">
+        <div class="page-icon">🤖</div>
+        <div>
+          <div class="page-title">Agents</div>
+          <div class="page-subtitle">Active Jupiter Command AI agents</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">5</div><div class="stat-label">Online</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--text-muted)">0</div><div class="stat-label">Offline</div></div>
+        <div class="stat-box"><div class="stat-value">3</div><div class="stat-label">Tasks Running</div></div>
+        <div class="stat-box"><div class="stat-value">24/7</div><div class="stat-label">Uptime</div></div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🛡</span>
+            <div><div class="card-title">DNSSEC Agent</div><div class="card-sub">agent-01</div></div>
+            <span class="chip chip-success" style="margin-left:auto">Online</span>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>Domain</span><span>arohm.org, howigiveback.org</span></div>
+            <div class="dash-row"><span>Last Check</span><span style="color:var(--success)">2 min ago</span></div>
+            <div class="dash-row"><span>DNSSEC</span><span class="chip chip-success">Verified</span></div>
+            <div class="dash-row"><span>SSL</span><span class="chip chip-success">Active</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn btn-outline btn-sm" onclick="showPanel('dns-monitor')">View DNS</button>
+              <button class="btn btn-outline btn-sm" onclick="restartAgent('DNSSEC Agent')">Restart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🐙</span>
+            <div><div class="card-title">GitHub Agent</div><div class="card-sub">agent-02</div></div>
+            <span class="chip chip-success" style="margin-left:auto">Online</span>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>Repos Monitored</span><span>3</span></div>
+            <div class="dash-row"><span>Last Sync</span><span style="color:var(--success)">5 min ago</span></div>
+            <div class="dash-row"><span>Open PRs</span><span class="chip chip-info">2</span></div>
+            <div class="dash-row"><span>CI Status</span><span class="chip chip-success">Passing</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn btn-outline btn-sm" onclick="agentSync('GitHub Agent')">Sync Now</button>
+              <button class="btn btn-outline btn-sm" onclick="restartAgent('GitHub Agent')">Restart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">⚡</span>
+            <div><div class="card-title">Workflow Agent</div><div class="card-sub">agent-03</div></div>
+            <span class="chip chip-success" style="margin-left:auto">Online</span>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>Active Workflows</span><span>4</span></div>
+            <div class="dash-row"><span>Tasks Completed</span><span>128</span></div>
+            <div class="dash-row"><span>Queue</span><span class="chip chip-warning">3 Pending</span></div>
+            <div class="dash-row"><span>Engine</span><span class="chip chip-success">Running</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn btn-outline btn-sm" onclick="showPanel('ai-command')">View Queue</button>
+              <button class="btn btn-outline btn-sm" onclick="restartAgent('Workflow Agent')">Restart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">💳</span>
+            <div><div class="card-title">Payment Agent</div><div class="card-sub">agent-04</div></div>
+            <span class="chip chip-success" style="margin-left:auto">Online</span>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>Donations Today</span><span style="color:var(--success)">$480</span></div>
+            <div class="dash-row"><span>Pending TXs</span><span class="chip chip-warning">2</span></div>
+            <div class="dash-row"><span>Wallet</span><span class="chip chip-success">Connected</span></div>
+            <div class="dash-row"><span>Network</span><span class="chip chip-info">Solana</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn btn-outline btn-sm" onclick="showPanel('donations')">View Donations</button>
+              <button class="btn btn-outline btn-sm" onclick="restartAgent('Payment Agent')">Restart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🏭</span>
+            <div><div class="card-title">CAD Agent</div><div class="card-sub">agent-05</div></div>
+            <span class="chip chip-success" style="margin-left:auto">Online</span>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>Adapters Active</span><span>7</span></div>
+            <div class="dash-row"><span>Jobs Queued</span><span id="agent-cam-jobs">0</span></div>
+            <div class="dash-row"><span>Toolpath Engine</span><span class="chip chip-success">Ready</span></div>
+            <div class="dash-row"><span>Last Analysis</span><span style="color:var(--text-muted)">—</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn btn-outline btn-sm" onclick="showPanel('toolpath')">Toolpath</button>
+              <button class="btn btn-outline btn-sm" onclick="restartAgent('CAD Agent')">Restart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── ANALYTICS ────────────────────── -->
+    <section class="panel" id="panel-analytics">
+      <div class="page-header">
+        <div class="page-icon">📊</div>
+        <div>
+          <div class="page-title">Analytics</div>
+          <div class="page-subtitle">Live mission &amp; organization metrics</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value" style="color:var(--warning)">$4,820</div><div class="stat-label">Total Donations</div></div>
+        <div class="stat-box"><div class="stat-value">138</div><div class="stat-label">Volunteers</div></div>
+        <div class="stat-box"><div class="stat-value">2,400</div><div class="stat-label">Outreach Reach</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">99.8%</div><div class="stat-label">API Health</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">5/5</div><div class="stat-label">Agents Up</div></div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">💛</span><div><div class="card-title">Donations</div><div class="card-sub">Last 30 days</div></div></div>
+          <div class="card-body">
+            <div class="analytics-chart" id="chart-donations">
+              <div class="chart-bars" id="bars-donations"></div>
+              <div class="chart-label">Monthly Donations (USD)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🙌</span><div><div class="card-title">Volunteers</div><div class="card-sub">Last 30 days</div></div></div>
+          <div class="card-body">
+            <div class="analytics-chart" id="chart-volunteers">
+              <div class="chart-bars" id="bars-volunteers"></div>
+              <div class="chart-label">Volunteer Signups</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📢</span><div><div class="card-title">Outreach</div><div class="card-sub">Reach &amp; engagement</div></div></div>
+          <div class="card-body">
+            <div class="analytics-chart" id="chart-outreach">
+              <div class="chart-bars" id="bars-outreach"></div>
+              <div class="chart-label">Outreach Contacts</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🔋</span><div><div class="card-title">API &amp; Agent Health</div><div class="card-sub">Uptime last 24h</div></div></div>
+          <div class="card-body">
+            <div class="dash-row"><span>DNSSEC Agent</span><span class="chip chip-success">100%</span></div>
+            <div class="dash-row"><span>GitHub Agent</span><span class="chip chip-success">100%</span></div>
+            <div class="dash-row"><span>Workflow Agent</span><span class="chip chip-success">99.8%</span></div>
+            <div class="dash-row"><span>Payment Agent</span><span class="chip chip-success">100%</span></div>
+            <div class="dash-row"><span>CAD Agent</span><span class="chip chip-success">100%</span></div>
+            <div class="dash-row" style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px"><span>Overall API Health</span><span class="chip chip-success">99.8%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── AI COMMAND CENTER ────────────── -->
+    <section class="panel" id="panel-ai-command">
+      <div class="page-header">
+        <div class="page-icon">🧠</div>
+        <div>
+          <div class="page-title">AI Command Center</div>
+          <div class="page-subtitle">ALFRED — Autonomous Intelligence Framework</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">Online</div><div class="stat-label">System Status</div></div>
+        <div class="stat-box"><div class="stat-value" id="aicc-queued">3</div><div class="stat-label">Tasks Queued</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">5</div><div class="stat-label">MCP Servers</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">Synced</div><div class="stat-label">GitHub</div></div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Task Queue</div><div class="card-sub">Pending agent tasks</div></div></div>
+          <div class="card-body" id="task-queue-list">
+            <div class="flow-step">
+              <div class="flow-num">1</div>
+              <div class="flow-body">
+                <div class="flow-title">DNS Audit — arohm.org <span class="chip chip-warning" style="font-size:0.65rem">Pending</span></div>
+                <div class="flow-desc">DNSSEC Agent · Scheduled: 02:00 UTC</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-num">2</div>
+              <div class="flow-body">
+                <div class="flow-title">GitHub PR Review <span class="chip chip-warning" style="font-size:0.65rem">Pending</span></div>
+                <div class="flow-desc">GitHub Agent · Trigger: on push</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-num">3</div>
+              <div class="flow-body">
+                <div class="flow-title">Donation Report Generation <span class="chip chip-warning" style="font-size:0.65rem">Pending</span></div>
+                <div class="flow-desc">Payment Agent · Trigger: weekly</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">⚙</span><div><div class="card-title">Workflow Engine</div><div class="card-sub">Active automation workflows</div></div></div>
+          <div class="card-body">
+            <div class="dash-row"><span>DNS Watch Loop</span><span class="chip chip-success">Running</span></div>
+            <div class="dash-row"><span>GitHub Sync Loop</span><span class="chip chip-success">Running</span></div>
+            <div class="dash-row"><span>Donation Aggregator</span><span class="chip chip-success">Running</span></div>
+            <div class="dash-row"><span>Volunteer Notifier</span><span class="chip chip-success">Running</span></div>
+            <div style="margin-top:12px">
+              <button class="btn btn-primary btn-sm" onclick="addTaskToQueue()">+ Add Task</button>
+              <button class="btn btn-outline btn-sm" style="margin-left:8px" onclick="clearQueue()">Clear Queue</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🖥</span><div><div class="card-title">MCP Servers</div><div class="card-sub">Model Context Protocol endpoints</div></div></div>
+          <div class="card-body">
+            <div class="dash-row"><span>mcp://localhost:3001</span><span class="chip chip-success">Online</span></div>
+            <div class="dash-row"><span>mcp://localhost:3002</span><span class="chip chip-success">Online</span></div>
+            <div class="dash-row"><span>mcp://localhost:3003</span><span class="chip chip-success">Online</span></div>
+            <div class="dash-row"><span>mcp://localhost:3004</span><span class="chip chip-success">Online</span></div>
+            <div class="dash-row"><span>mcp://localhost:3005</span><span class="chip chip-success">Online</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🐙</span><div><div class="card-title">GitHub Sync</div><div class="card-sub">Repository integration status</div></div></div>
+          <div class="card-body">
+            <div class="dash-row"><span>jupiter-command</span><span class="chip chip-success">In Sync</span></div>
+            <div class="dash-row"><span>arohm-org/website</span><span class="chip chip-success">In Sync</span></div>
+            <div class="dash-row"><span>howigiveback/portal</span><span class="chip chip-info">Syncing…</span></div>
+            <div class="dash-row" style="margin-top:10px"><span>Last Full Sync</span><span style="color:var(--text-muted)">5 min ago</span></div>
+            <div style="margin-top:10px">
+              <button class="btn btn-outline btn-sm" onclick="triggerGithubSync()">🔄 Sync Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── DNS MONITOR ───────────────────── -->
+    <section class="panel" id="panel-dns-monitor">
+      <div class="page-header">
+        <div class="page-icon">🌐</div>
+        <div>
+          <div class="page-title">DNS Monitor</div>
+          <div class="page-subtitle">DNSSEC &amp; SSL status for Jupiter domains</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">2/2</div><div class="stat-label">Domains Verified</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">Active</div><div class="stat-label">SSL / TLS</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">Valid</div><div class="stat-label">DNSSEC</div></div>
+        <div class="stat-box"><div class="stat-value">Algo 13</div><div class="stat-label">Key Algorithm</div></div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🛡</span>
+            <div><div class="card-title">arohm.org</div><div class="card-sub">Primary domain</div></div>
+            <span class="chip chip-success" style="margin-left:auto">✅ Verified</span>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>DNSSEC</span><span class="chip chip-success">Enabled</span></div>
+            <div class="dash-row"><span>SSL</span><span class="chip chip-success">Active</span></div>
+            <div class="dash-row"><span>Key Tag</span><span style="font-family:var(--font-mono);color:var(--accent)">61646</span></div>
+            <div class="dash-row"><span>Algorithm</span><span>ECDSA P-256 (13)</span></div>
+            <div class="dash-row"><span>DS Digest</span><span class="chip chip-info">SHA-256 + SHA-384</span></div>
+            <div class="dns-key-block" style="margin-top:12px">
+              <div class="form-label" style="margin-bottom:6px">DNSKEY (Public)</div>
+              <code style="font-size:0.72rem;word-break:break-all;color:var(--accent);display:block;background:var(--bg-deep);border:1px solid var(--border);border-radius:4px;padding:8px">lcYf2GMUIV/scTVCd9CMBMUntM+3zB/FNWhHBsACxrphjWgEkalF5d3nZsGVvcmJVGFSzNvKibS/3HX9wVh7fg==</code>
+            </div>
+            <div style="margin-top:12px">
+              <button class="btn btn-outline btn-sm" onclick="runDNSCheck('arohm.org')">🔍 Run Check</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">💚</span>
+            <div><div class="card-title">howigiveback.org</div><div class="card-sub">Giving portal domain</div></div>
+            <span class="chip chip-success" style="margin-left:auto">✅ Verified</span>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>DNSSEC</span><span class="chip chip-success">Enabled</span></div>
+            <div class="dash-row"><span>SSL</span><span class="chip chip-success">Active</span></div>
+            <div class="dash-row"><span>SSL Expiry</span><span style="color:var(--success)">89 days</span></div>
+            <div class="dash-row"><span>Algorithm</span><span>ECDSA P-256 (13)</span></div>
+            <div class="dash-row"><span>Monitoring</span><span class="chip chip-success">Enabled</span></div>
+            <div style="margin-top:12px">
+              <button class="btn btn-outline btn-sm" onclick="runDNSCheck('howigiveback.org')">🔍 Run Check</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column:1/-1">
+          <div class="card-header"><span class="card-icon">📜</span><div><div class="card-title">DS Records — arohm.org</div></div></div>
+          <div class="card-body">
+            <div class="table-wrap" style="margin-bottom:0">
+              <table>
+                <thead><tr><th>Key Tag</th><th>Algorithm</th><th>Digest Type</th><th>Digest</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td style="font-family:var(--font-mono)">61646</td>
+                    <td>13 (ECDSA)</td>
+                    <td>2 (SHA-256)</td>
+                    <td style="font-family:var(--font-mono);font-size:0.72rem;word-break:break-all">dad33189331ddfc34d3088a8c5f998807e47f67a9905e64ceb0ea53d8976152b</td>
+                    <td><span class="chip chip-success">Valid</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-family:var(--font-mono)">61646</td>
+                    <td>13 (ECDSA)</td>
+                    <td>4 (SHA-384)</td>
+                    <td style="font-family:var(--font-mono);font-size:0.72rem;word-break:break-all">f90dfd0e45a3213695b96e684b72d84a83d508900fb0828d29511a25115320733ef0afaa77f7366e37e9de411929d82f</td>
+                    <td><span class="chip chip-success">Valid</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── AROHM ─────────────────────────── -->
+    <section class="panel" id="panel-arohm">
+      <div class="page-header">
+        <div class="page-icon">🌍</div>
+        <div>
+          <div class="page-title">AROHM Projects</div>
+          <div class="page-subtitle">arohm.org — Community programs &amp; initiatives</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value">3</div><div class="stat-label">Active Programs</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">412</div><div class="stat-label">People Helped</div></div>
+        <div class="stat-box"><div class="stat-value">28</div><div class="stat-label">Volunteers</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--warning)">$1,200</div><div class="stat-label">Funds Distributed</div></div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">📦</span>
+            <div><div class="card-title">Community Aid</div><div class="card-sub">Direct support program</div></div>
+            <span class="chip chip-success" style="margin-left:auto">Active</span>
+          </div>
+          <div class="card-body">
+            <p>Providing direct aid — food, supplies, and resources — to community members in need.</p>
+            <div class="progress-bar" style="margin-top:12px"><div class="progress-fill" style="width:74%"></div></div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">74% of monthly goal reached</div>
+            <div style="margin-top:12px"><button class="btn btn-outline btn-sm">View Reports</button></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">📢</span>
+            <div><div class="card-title">Outreach</div><div class="card-sub">Community engagement</div></div>
+            <span class="chip chip-success" style="margin-left:auto">Active</span>
+          </div>
+          <div class="card-body">
+            <p>Engaging with local communities, organizations, and partners to spread awareness and build networks.</p>
+            <div class="progress-bar" style="margin-top:12px"><div class="progress-fill" style="width:88%;background:var(--success)"></div></div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">2,400 contacts reached this month</div>
+            <div style="margin-top:12px"><button class="btn btn-outline btn-sm">View Outreach</button></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">📚</span>
+            <div><div class="card-title">Education</div><div class="card-sub">Skills &amp; training initiatives</div></div>
+            <span class="chip chip-success" style="margin-left:auto">Active</span>
+          </div>
+          <div class="card-body">
+            <p>Free workshops, training sessions, and digital skills programs for under-served community members.</p>
+            <div class="progress-bar" style="margin-top:12px"><div class="progress-fill" style="width:52%"></div></div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">52% of enrollment goal</div>
+            <div style="margin-top:12px"><button class="btn btn-outline btn-sm">View Curriculum</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="card-header"><span class="card-icon">📞</span><div><div class="card-title">Contact AROHM</div></div></div>
+        <div class="card-body">
+          <div class="dash-row"><span>Email</span><span><a href="mailto:support@howtogiveback.org" style="color:var(--accent)">support@howtogiveback.org</a></span></div>
+          <div class="dash-row"><span>Website</span><span><a href="https://howtogiveback.org" target="_blank" rel="noopener" style="color:var(--accent)">howtogiveback.org</a></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── HOWIGIVEBACK ─────────────────── -->
+    <section class="panel" id="panel-howigiveback">
+      <div class="page-header">
+        <div class="page-icon">💚</div>
+        <div>
+          <div class="page-title">HowIGiveBack</div>
+          <div class="page-subtitle">howtogiveback.org — Giving portal</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value">138</div><div class="stat-label">Volunteers</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--warning)">$4,820</div><div class="stat-label">Donations Raised</div></div>
+        <div class="stat-box"><div class="stat-value">14</div><div class="stat-label">Events This Month</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">Active</div><div class="stat-label">Portal Status</div></div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🙌</span>
+            <div><div class="card-title">Volunteer Portal</div><div class="card-sub">Sign-up &amp; management</div></div>
+          </div>
+          <div class="card-body">
+            <p>Manage volunteer registrations, assign roles, and track hours contributed across all programs.</p>
+            <div class="dash-row" style="margin-top:12px"><span>New this week</span><span style="color:var(--success)">+12</span></div>
+            <div class="dash-row"><span>Total Hours</span><span>1,840 hrs</span></div>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <a href="https://howtogiveback.org" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Open Portal</a>
+              <button class="btn btn-outline btn-sm">View Volunteers</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">💛</span>
+            <div><div class="card-title">Donations</div><div class="card-sub">Giving overview</div></div>
+          </div>
+          <div class="card-body">
+            <p>Track all donations — crypto and fiat — across the Jupiter ecosystem. Support community programs directly.</p>
+            <div class="dash-row" style="margin-top:12px"><span>This month</span><span style="color:var(--warning)">$1,240</span></div>
+            <div class="dash-row"><span>All time</span><span style="color:var(--warning)">$4,820</span></div>
+            <div style="margin-top:12px">
+              <button class="btn btn-primary btn-sm" onclick="showPanel('donations')">Donate Now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">📅</span>
+            <div><div class="card-title">Events</div><div class="card-sub">Upcoming community events</div></div>
+          </div>
+          <div class="card-body">
+            <div class="dash-row"><span>Community Clean-up</span><span style="color:var(--text-muted)">Jul 12</span></div>
+            <div class="dash-row"><span>Tech Workshop</span><span style="color:var(--text-muted)">Jul 19</span></div>
+            <div class="dash-row"><span>Food Drive</span><span style="color:var(--text-muted)">Jul 26</span></div>
+            <div class="dash-row"><span>Fundraiser Gala</span><span style="color:var(--text-muted)">Aug 3</span></div>
+            <div style="margin-top:12px">
+              <button class="btn btn-outline btn-sm">View All Events</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── DONATIONS ─────────────────────── -->
+    <section class="panel" id="panel-donations">
+      <div class="page-header">
+        <div class="page-icon">💛</div>
+        <div>
+          <div class="page-title">Donations</div>
+          <div class="page-subtitle">Support the Jupiter Command mission</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-value" style="color:var(--warning)">$4,820</div><div class="stat-label">Total Raised</div></div>
+        <div class="stat-box"><div class="stat-value">247</div><div class="stat-label">Donors</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--warning)">$1,240</div><div class="stat-label">This Month</div></div>
+        <div class="stat-box"><div class="stat-value" style="color:var(--success)">$19.51</div><div class="stat-label">Avg Donation</div></div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🪙</span><div><div class="card-title">Crypto Donation</div><div class="card-sub">Solana (SOL) wallet</div></div></div>
+          <div class="card-body">
+            <p style="margin-bottom:14px">Send any Solana-compatible token to the address below. Every contribution goes directly to community programs.</p>
+            <div class="wallet-box">
+              <div class="form-label">Wallet Address</div>
+              <div class="wallet-addr" id="wallet-addr">7mWvKtzKvXzupqBaMYLo2Q7uzcXiEdfdMWgG6N12eEah</div>
+              <button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="copyWallet()">📋 Copy Address</button>
+            </div>
+            <div class="dash-row" style="margin-top:14px"><span>Network</span><span class="chip chip-info">Solana Mainnet</span></div>
+            <div class="dash-row"><span>Accepted Tokens</span><span>SOL, JUP, USDC</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">💳</span><div><div class="card-title">Other Ways to Give</div><div class="card-sub">Fiat &amp; alternative options</div></div></div>
+          <div class="card-body">
+            <div class="flow-step">
+              <div class="flow-num">1</div>
+              <div class="flow-body">
+                <div class="flow-title">Online Portal</div>
+                <div class="flow-desc">Give via card or bank at <a href="https://howtogiveback.org" target="_blank" rel="noopener" style="color:var(--accent)">howtogiveback.org</a></div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-num">2</div>
+              <div class="flow-body">
+                <div class="flow-title">Email Us</div>
+                <div class="flow-desc"><a href="mailto:support@howtogiveback.org" style="color:var(--accent)">support@howtogiveback.org</a></div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-num">3</div>
+              <div class="flow-body">
+                <div class="flow-title">Volunteer</div>
+                <div class="flow-desc">Donate your time and skills through the volunteer portal.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column:1/-1">
+          <div class="card-header"><span class="card-icon">📜</span><div><div class="card-title">Recent Donations</div></div></div>
+          <div class="card-body">
+            <div class="table-wrap" style="margin-bottom:0">
+              <table>
+                <thead><tr><th>Date</th><th>Amount</th><th>Currency</th><th>Method</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Jul 3, 2026</td><td>$50</td><td>SOL</td><td>Crypto</td><td><span class="chip chip-success">Confirmed</span></td></tr>
+                  <tr><td>Jul 2, 2026</td><td>$25</td><td>USDC</td><td>Crypto</td><td><span class="chip chip-success">Confirmed</span></td></tr>
+                  <tr><td>Jul 1, 2026</td><td>$100</td><td>USD</td><td>Portal</td><td><span class="chip chip-success">Confirmed</span></td></tr>
+                  <tr><td>Jun 30, 2026</td><td>$10</td><td>JUP</td><td>Crypto</td><td><span class="chip chip-success">Confirmed</span></td></tr>
+                  <tr><td>Jun 29, 2026</td><td>$200</td><td>USD</td><td>Portal</td><td><span class="chip chip-success">Confirmed</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
   </main>

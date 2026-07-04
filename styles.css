@@ -616,6 +616,134 @@ tbody tr:hover td { background: var(--accent-glow); }
   transition: width 0.4s ease;
 }
 
+/* ── Dashboard triple / half grids ─────────────────────────── */
+.db-triple-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.db-half-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* ── Dash helper rows ───────────────────────────────────────── */
+.dash-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  gap: 8px;
+}
+
+.dash-row:last-child { border-bottom: none; }
+.dash-row span:first-child { color: var(--text-muted); }
+.dash-row span:last-child  { color: var(--text-primary); text-align: right; }
+
+/* ── Dash list (agents / project bullets) ───────────────────── */
+.dash-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.84rem;
+  color: var(--text-primary);
+}
+
+.dash-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot-online {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 6px var(--success);
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+/* ── Mini bars (dashboard analytics preview) ────────────────── */
+.mini-bar-wrap { margin-bottom: 10px; }
+.mini-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+/* ── Activity feed ──────────────────────────────────────────── */
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.83rem;
+  color: var(--text-primary);
+}
+
+.activity-item:last-child { border-bottom: none; }
+
+/* ── Analytics chart bars ───────────────────────────────────── */
+.analytics-chart {
+  width: 100%;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 100px;
+  padding-bottom: 4px;
+}
+
+.chart-bar {
+  flex: 1;
+  background: var(--accent);
+  border-radius: 3px 3px 0 0;
+  min-height: 4px;
+  opacity: 0.75;
+  transition: opacity var(--trans);
+  position: relative;
+}
+
+.chart-bar:hover { opacity: 1; }
+
+.chart-label {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Wallet display ─────────────────────────────────────────── */
+.wallet-box {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.wallet-addr {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  word-break: break-all;
+  color: var(--accent);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 768px) {
   :root { --sidebar-w: 0px; }
@@ -635,6 +763,7 @@ tbody tr:hover td { background: var(--accent-glow); }
   #main { padding: 16px; }
 
   .grid, .grid-2 { grid-template-columns: 1fr; }
+  .db-triple-grid, .db-half-grid { grid-template-columns: 1fr; }
 
   #burger { display: flex; }
 }
