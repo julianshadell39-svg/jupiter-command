@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jupiter Command — AI DeFi Center</title>
+  <link rel="icon" href="./arohm-icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="brand">
+        <img src="./arohm-icon.svg" alt="Jupiter Command logo" class="header-logo" />
+        <span class="brand-name">Jupiter Command</span>
+      </a>
+      <nav class="site-nav">
+        <a href="#alfred">ALFRED</a>
+        <a href="#prices">Prices</a>
+        <a href="#donate">Donate</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <img src="./arohm-icon.svg" alt="Hero badge" class="hero-badge" />
+        <h1 class="hero-title">Jupiter Command</h1>
+        <p class="hero-subtitle">
+          AI-Powered DeFi Command Center on Solana — natural language trades, portfolio analytics, and real-time market data.
+        </p>
+        <a href="#alfred" class="btn btn-primary">Launch ALFRED</a>
+      </div>
+    </section>
+
+    <!-- Live Price Ticker -->
+    <section class="price-ticker-section" id="prices">
+      <h2 class="section-title">Live Market Prices</h2>
+      <div class="price-grid">
+        <div class="price-card" id="price-sol">
+          <span class="ticker-symbol">SOL</span>
+          <span class="ticker-price" data-coin="solana">—</span>
+          <span class="ticker-change" data-change="solana">—</span>
+        </div>
+        <div class="price-card" id="price-jup">
+          <span class="ticker-symbol">JUP</span>
+          <span class="ticker-price" data-coin="jupiter-exchange-solana">—</span>
+          <span class="ticker-change" data-change="jupiter-exchange-solana">—</span>
+        </div>
+        <div class="price-card" id="price-btc">
+          <span class="ticker-symbol">BTC</span>
+          <span class="ticker-price" data-coin="bitcoin">—</span>
+          <span class="ticker-change" data-change="bitcoin">—</span>
+        </div>
+        <div class="price-card" id="price-eth">
+          <span class="ticker-symbol">ETH</span>
+          <span class="ticker-price" data-coin="ethereum">—</span>
+          <span class="ticker-change" data-change="ethereum">—</span>
+        </div>
+        <div class="price-card" id="price-bnb">
+          <span class="ticker-symbol">BNB</span>
+          <span class="ticker-price" data-coin="binancecoin">—</span>
+          <span class="ticker-change" data-change="binancecoin">—</span>
+        </div>
+      </div>
+      <p class="price-source">Prices via CoinGecko — updates every 60 seconds</p>
+    </section>
+
+    <!-- ALFRED AI Communicator -->
+    <section class="alfred-section" id="alfred">
+      <div class="alfred-hud">
+        <div class="hud-header">
+          <div class="hud-indicator"></div>
+          <h2 class="hud-title">ALFRED <span class="hud-sub">AI Communicator</span></h2>
+          <div class="hud-indicator"></div>
+        </div>
+        <div class="alfred-log" id="alfredLog" aria-live="polite" aria-label="ALFRED conversation log">
+          <div class="alfred-msg alfred">
+            <span class="msg-sender">ALFRED</span>
+            <span class="msg-text">Good day, Commander. How may I assist your DeFi operations today?</span>
+          </div>
+        </div>
+        <div class="alfred-input-row">
+          <input
+            type="text"
+            id="alfredInput"
+            class="alfred-input"
+            placeholder="Type a command or question…"
+            aria-label="Command input"
+            autocomplete="off"
+          />
+          <button class="btn btn-mic" id="micBtn" title="Voice input" aria-label="Start voice input">
+            🎙
+          </button>
+          <button class="btn btn-send" id="sendBtn" aria-label="Send command">Send</button>
+        </div>
+        <p class="alfred-hint" id="voiceStatus"></p>
+      </div>
+    </section>
+
+    <!-- Donate -->
+    <section class="donate-section" id="donate">
+      <h2 class="section-title">Support the Mission</h2>
+      <p class="donate-text">
+        If Jupiter Command has helped you navigate DeFi, consider sending a donation to fuel continued development.
+      </p>
+      <div class="wallet-box">
+        <span class="wallet-label">Solana Wallet</span>
+        <code class="wallet-address" id="walletAddress">7mWvKtzKvXzupqBaMYLo2Q7uzcXiEdfdMWgG6N12eEah</code>
+        <button class="btn btn-copy" id="copyWalletBtn" aria-label="Copy wallet address">Copy</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer / Contact -->
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <p class="footer-brand">Jupiter Command &copy; <span id="footerYear"></span></p>
+      <div class="footer-links">
+        <a href="mailto:support@howtogiveback.org">support@howtogiveback.org</a>
+        <a href="https://howtogiveback.org" target="_blank" rel="noopener noreferrer">howtogiveback.org</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
