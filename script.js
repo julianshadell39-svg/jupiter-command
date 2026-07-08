@@ -10,6 +10,7 @@ const COINGECKO_URL =
   'https://api.coingecko.com/api/v3/simple/price?ids=' +
   COINGECKO_IDS.join(',') +
   '&vs_currencies=usd&include_24hr_change=true';
+const COMMAND_API_URL = '/api/command';
 
 // ALFRED knowledge base — pattern → response
 const ALFRED_RESPONSES = [
@@ -97,6 +98,22 @@ function alfredReply(text) {
   return DEFAULT_REPLY;
 }
 
+async function requestCommandReply(text) {
+  try {
+    const res = await fetch(COMMAND_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!data || typeof data.reply !== 'string') return null;
+    return data.reply;
+  } catch (_err) {
+    return null;
+  }
+}
+
 function appendMessage(sender, text) {
   const wrapper = document.createElement('div');
   wrapper.className = 'alfred-msg ' + (sender === 'ALFRED' ? 'alfred' : 'user');
@@ -115,11 +132,12 @@ function appendMessage(sender, text) {
   alfredLog.scrollTop = alfredLog.scrollHeight;
 }
 
-function processCommand(input) {
+async function processCommand(input) {
   const text = input.trim();
   if (!text) return;
   appendMessage('Commander', text);
-  const reply = alfredReply(text);
+  const remoteReply = await requestCommandReply(text);
+  const reply = remoteReply || alfredReply(text);
   // Small delay to feel more natural
   setTimeout(() => appendMessage('ALFRED', reply), 320);
 }

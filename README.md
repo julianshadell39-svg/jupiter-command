@@ -1,6 +1,18 @@
 # jupiter-command
 AI Command Center for Jupiter DeFi on Solana. Built with Base44. Features wallet connect, Jupiter Terminal integration, Superagent AI for natural language DeFi commands, portfolio analytics. Bootstrapped MVP with freemium SaaS model.
 
+## Run command server (package root)
+
+From `/home/runner/work/jupiter-command/jupiter-command`:
+
+- `npm install`
+- `npm start`
+
+Server endpoints:
+
+- `GET /api/health`
+- `POST /api/command` with JSON body `{ "text": "your command" }`
+
 ## Phase 1 Focus: Financial Support and Cooperation Growth
 
 - Map support network: family, peers, mentors, community groups, and professional contacts.

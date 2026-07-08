@@ -1,0 +1,26 @@
+{
+  "name": "jupiter-command",
+  "version": "1.0.0",
+  "description": "AI Command Center for Jupiter DeFi on Solana. Built with Base44. Features wallet connect, Jupiter Terminal integration, Superagent AI for natural language DeFi commands, portfolio analytics. Bootstrapped MVP with freemium SaaS model.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"No automated tests configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianshadell39-svg/jupiter-command.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/julianshadell39-svg/jupiter-command/issues"
+  },
+  "homepage": "https://github.com/julianshadell39-svg/jupiter-command#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
