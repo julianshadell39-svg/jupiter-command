@@ -431,6 +431,81 @@ section {
   min-height: 1.5rem;
 }
 
+/* ── Team ────────────────────────────────────── */
+.team-section {
+  background: var(--bg-base);
+  border-top: 1px solid var(--border);
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.team-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  width: 220px;
+  flex: 1 1 200px;
+  max-width: 240px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.team-card:hover {
+  border-color: var(--accent-gold);
+  box-shadow: var(--glow-gold);
+}
+
+.team-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.team-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(245, 200, 0, 0.08);
+  border: 2px solid var(--accent-gold);
+  box-shadow: var(--glow-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+}
+
+.team-name {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent-gold);
+  margin-bottom: 0.3rem;
+}
+
+.team-role {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 0.75rem;
+}
+
+.team-bio {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
 /* ── Donate ──────────────────────────────────── */
 .donate-section {
   background: var(--bg-panel);
