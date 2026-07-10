@@ -1,0 +1,13 @@
+{
+  "name": "jupiter-command",
+  "version": "1.0.0",
+  "description": "AI-Powered DeFi Command Center on Solana",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "network": "HOST=0.0.0.0 node server.js",
+    "test": "echo \"No tests configured\" && exit 0"
+  },
+  "license": "MIT"
+}
