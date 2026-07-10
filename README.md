@@ -34,3 +34,16 @@ AI Command Center for Jupiter DeFi on Solana. Built with Base44. Features wallet
 ## Product Scope Update
 
 - Add pump.fun integration to supported Solana DeFi workflows.
+
+## Local Hardhat Workflow
+
+This repository now includes a minimal Hardhat setup for local contract development.
+
+1. Install dependencies:
+   - `yarn install`
+2. Start a local Hardhat blockchain in one terminal:
+   - `yarn network`
+3. Deploy the sample contract from a second terminal:
+   - `yarn deploy`
+
+The deploy script compiles and deploys `/home/runner/work/jupiter-command/jupiter-command/contracts/Counter.sol` to the local node at `http://127.0.0.1:8545`.

@@ -1,0 +1,28 @@
+{
+  "name": "jupiter-command",
+  "version": "1.0.0",
+  "description": "AI Command Center for Jupiter DeFi on Solana. Built with Base44. Features wallet connect, Jupiter Terminal integration, Superagent AI for natural language DeFi commands, portfolio analytics. Bootstrapped MVP with freemium SaaS model.",
+  "main": "script.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "network": "hardhat node --network hardhatMainnet",
+    "deploy": "hardhat run scripts/deploy.js --network localhost"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianshadell39-svg/jupiter-command.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/julianshadell39-svg/jupiter-command/issues"
+  },
+  "homepage": "https://github.com/julianshadell39-svg/jupiter-command#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "4.0.14",
+    "ethers": "6.17.0",
+    "hardhat": "3.9.1"
+  }
+}
