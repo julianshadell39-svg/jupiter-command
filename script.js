@@ -6,6 +6,9 @@
 
 const COINGECKO_IDS = ['solana', 'jupiter-exchange-solana', 'bitcoin', 'ethereum', 'binancecoin'];
 const PRICE_REFRESH_MS = 60_000;
+const TASK_STORAGE_KEY = 'jupiter-command-tasks-v1';
+const TASK_WORKFLOW = ['Backlog', 'Ready', 'In Progress', 'Review', 'Approved', 'Complete', 'Archived'];
+const TASK_PRIORITY_ORDER = { Critical: 1, High: 2, Normal: 3, Low: 4 };
 const COINGECKO_URL =
   'https://api.coingecko.com/api/v3/simple/price?ids=' +
   COINGECKO_IDS.join(',') +
@@ -39,6 +42,17 @@ const micBtn = document.getElementById('micBtn');
 const voiceStatus = document.getElementById('voiceStatus');
 const copyWalletBtn = document.getElementById('copyWalletBtn');
 const footerYear = document.getElementById('footerYear');
+const taskForm = document.getElementById('taskForm');
+const taskTitle = document.getElementById('taskTitle');
+const taskType = document.getElementById('taskType');
+const taskPriority = document.getElementById('taskPriority');
+const taskAssignee = document.getElementById('taskAssignee');
+const taskStatusFilter = document.getElementById('taskStatusFilter');
+const taskPriorityFilter = document.getElementById('taskPriorityFilter');
+const taskSearch = document.getElementById('taskSearch');
+const taskStats = document.getElementById('taskStats');
+const taskList = document.getElementById('taskList');
+const taskEmpty = document.getElementById('taskEmpty');
 
 // ── Footer Year ────────────────────────────────────────────────────────────────
 
@@ -87,6 +101,181 @@ function updatePriceCards(data) {
 
 fetchPrices();
 setInterval(fetchPrices, PRICE_REFRESH_MS);
+
+// ── CommandCenter Task Manager ───────────────────────────────────────────────────
+
+let tasks = loadTasks();
+
+function loadTasks() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(TASK_STORAGE_KEY) || '[]');
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveTasks() {
+  localStorage.setItem(TASK_STORAGE_KEY, JSON.stringify(tasks));
+}
+
+function createTask(title, type, priority, assignee) {
+  return {
+    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()),
+    title,
+    type,
+    priority,
+    assignee,
+    status: 'Backlog',
+    createdAt: Date.now()
+  };
+}
+
+function nextStatus(current) {
+  const currentIndex = TASK_WORKFLOW.indexOf(current);
+  if (currentIndex < 0 || currentIndex === TASK_WORKFLOW.length - 1) return current;
+  return TASK_WORKFLOW[currentIndex + 1];
+}
+
+function filteredTasks() {
+  const statusValue = taskStatusFilter ? taskStatusFilter.value : 'all';
+  const priorityValue = taskPriorityFilter ? taskPriorityFilter.value : 'all';
+  const searchValue = (taskSearch ? taskSearch.value : '').trim().toLowerCase();
+
+  return tasks
+    .filter(task => statusValue === 'all' || task.status === statusValue)
+    .filter(task => priorityValue === 'all' || task.priority === priorityValue)
+    .filter(task => !searchValue || task.title.toLowerCase().includes(searchValue) || task.type.toLowerCase().includes(searchValue) || task.assignee.toLowerCase().includes(searchValue))
+    .sort((a, b) => {
+      const priorityDelta = TASK_PRIORITY_ORDER[a.priority] - TASK_PRIORITY_ORDER[b.priority];
+      if (priorityDelta !== 0) return priorityDelta;
+      return b.createdAt - a.createdAt;
+    });
+}
+
+function updateTaskStats(displayTasks) {
+  if (!taskStats) return;
+  const total = tasks.length;
+  const active = tasks.filter(task => task.status !== 'Archived').length;
+  const complete = tasks.filter(task => task.status === 'Complete').length;
+  const visible = displayTasks.length;
+  taskStats.innerHTML = '';
+  const labels = [
+    `Total: ${total}`,
+    `Active: ${active}`,
+    `Complete: ${complete}`,
+    `Visible: ${visible}`
+  ];
+  labels.forEach(label => {
+    const span = document.createElement('span');
+    span.className = 'task-stat';
+    span.textContent = label;
+    taskStats.appendChild(span);
+  });
+}
+
+function renderTasks() {
+  if (!taskList || !taskEmpty) return;
+  const displayTasks = filteredTasks();
+  updateTaskStats(displayTasks);
+  taskList.innerHTML = '';
+
+  if (!displayTasks.length) {
+    taskEmpty.style.display = 'block';
+    return;
+  }
+
+  taskEmpty.style.display = 'none';
+  const fragment = document.createDocumentFragment();
+
+  displayTasks.forEach(task => {
+    const item = document.createElement('li');
+    item.className = `task-item priority-${task.priority}`;
+    item.dataset.taskId = task.id;
+
+    const escapedStatus = task.status;
+    item.innerHTML = `
+      <div class="task-main">
+        <p class="task-title">${task.title}</p>
+        <strong>${escapedStatus}</strong>
+      </div>
+      <div class="task-meta">
+        <span class="task-tag">${task.type}</span>
+        <span class="task-tag">${task.priority}</span>
+        <span class="task-tag">${task.assignee}</span>
+      </div>
+      <div class="task-actions">
+        <button type="button" data-action="advance">Advance</button>
+        <button type="button" data-action="complete">Complete</button>
+        <button type="button" data-action="archive">Archive</button>
+        <button type="button" data-action="delete">Delete</button>
+      </div>
+    `;
+    fragment.appendChild(item);
+  });
+
+  taskList.appendChild(fragment);
+}
+
+function scheduleTaskRender() {
+  if (!scheduleTaskRender.pending) {
+    scheduleTaskRender.pending = true;
+    requestAnimationFrame(() => {
+      renderTasks();
+      scheduleTaskRender.pending = false;
+    });
+  }
+}
+scheduleTaskRender.pending = false;
+
+if (taskForm) {
+  taskForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const title = taskTitle.value.trim();
+    if (!title) return;
+    tasks.unshift(createTask(title, taskType.value, taskPriority.value, taskAssignee.value));
+    saveTasks();
+    taskForm.reset();
+    taskPriority.value = 'Normal';
+    scheduleTaskRender();
+  });
+}
+
+if (taskList) {
+  taskList.addEventListener('click', event => {
+    const button = event.target.closest('button[data-action]');
+    if (!button) return;
+    const taskItem = event.target.closest('[data-task-id]');
+    if (!taskItem) return;
+    const taskId = taskItem.dataset.taskId;
+    const target = tasks.find(task => task.id === taskId);
+    if (!target) return;
+
+    const action = button.dataset.action;
+    if (action === 'advance') target.status = nextStatus(target.status);
+    if (action === 'complete') target.status = 'Complete';
+    if (action === 'archive') target.status = 'Archived';
+    if (action === 'delete') tasks = tasks.filter(task => task.id !== taskId);
+
+    saveTasks();
+    scheduleTaskRender();
+  });
+}
+
+[taskStatusFilter, taskPriorityFilter].forEach(el => {
+  if (!el) return;
+  el.addEventListener('change', scheduleTaskRender);
+});
+
+if (taskSearch) {
+  let searchTimer = null;
+  taskSearch.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(scheduleTaskRender, 120);
+  });
+}
+
+scheduleTaskRender();
 
 // ── ALFRED AI Communicator ─────────────────────────────────────────────────────
 

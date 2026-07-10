@@ -4,19 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jupiter Command — AI DeFi Center</title>
-  <link rel="icon" href="./arohm-icon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./eye-star-badge.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./eye-star-badge.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
       <a href="#" class="brand">
-        <img src="./arohm-icon.svg" alt="Jupiter Command logo" class="header-logo" />
+        <img src="./eye-star-badge.svg" alt="Jupiter Command logo" class="header-logo" />
         <span class="brand-name">Jupiter Command</span>
       </a>
       <nav class="site-nav">
+        <a href="#tasks">Tasks</a>
         <a href="#alfred">ALFRED</a>
         <a href="#prices">Prices</a>
+        <a href="#monetize">Monetize</a>
         <a href="#donate">Donate</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -27,12 +30,73 @@
     <!-- Hero -->
     <section class="hero" id="hero">
       <div class="hero-inner">
-        <img src="./arohm-icon.svg" alt="Hero badge" class="hero-badge" />
+        <img src="./eye-star-badge.svg" alt="Hero badge" class="hero-badge" />
         <h1 class="hero-title">Jupiter Command</h1>
         <p class="hero-subtitle">
           AI-Powered DeFi Command Center on Solana — natural language trades, portfolio analytics, and real-time market data.
         </p>
         <a href="#alfred" class="btn btn-primary">Launch ALFRED</a>
+      </div>
+    </section>
+
+    <!-- Task Manager -->
+    <section class="task-section" id="tasks">
+      <h2 class="section-title">Command Task Manager</h2>
+      <div class="task-panel">
+        <form class="task-form" id="taskForm">
+          <input type="text" id="taskTitle" class="task-input" placeholder="Create a task..." aria-label="Task title" required maxlength="120" />
+          <select id="taskType" class="task-select" aria-label="Task type">
+            <option>Development</option>
+            <option>Research</option>
+            <option>Investment</option>
+            <option>Security</option>
+            <option>Infrastructure</option>
+            <option>Documentation</option>
+            <option>Humanitarian</option>
+            <option>Maintenance</option>
+          </select>
+          <select id="taskPriority" class="task-select" aria-label="Task priority">
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Normal" selected>Normal</option>
+            <option value="Low">Low</option>
+          </select>
+          <select id="taskAssignee" class="task-select" aria-label="Task assignee">
+            <option>MIKEL</option>
+            <option>Sophia</option>
+            <option>Grok</option>
+            <option>Claude</option>
+            <option>GodsHammer</option>
+            <option>EVA</option>
+            <option>Amica</option>
+          </select>
+          <button type="submit" class="btn btn-send">Add Task</button>
+        </form>
+
+        <div class="task-controls">
+          <select id="taskStatusFilter" class="task-select" aria-label="Filter by status">
+            <option value="all">All Status</option>
+            <option value="Backlog">Backlog</option>
+            <option value="Ready">Ready</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Review">Review</option>
+            <option value="Approved">Approved</option>
+            <option value="Complete">Complete</option>
+            <option value="Archived">Archived</option>
+          </select>
+          <select id="taskPriorityFilter" class="task-select" aria-label="Filter by priority">
+            <option value="all">All Priority</option>
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Normal">Normal</option>
+            <option value="Low">Low</option>
+          </select>
+          <input type="search" id="taskSearch" class="task-input" placeholder="Search tasks..." aria-label="Search tasks" />
+        </div>
+
+        <div class="task-stats" id="taskStats" aria-live="polite"></div>
+        <ul class="task-list" id="taskList" aria-label="Task list"></ul>
+        <p class="task-empty" id="taskEmpty">No tasks yet. Add one to activate CommandCenter workflow.</p>
       </div>
     </section>
 
@@ -67,6 +131,28 @@
         </div>
       </div>
       <p class="price-source">Prices via CoinGecko — updates every 60 seconds</p>
+    </section>
+
+    <!-- Monetization -->
+    <section class="monetize-section" id="monetize">
+      <h2 class="section-title">Monetize Operations</h2>
+      <div class="monetize-grid">
+        <article class="monetize-card">
+          <h3>Affiliate Revenue</h3>
+          <p>Share your Jupiter Command link and track referral performance from your campaigns.</p>
+          <a class="btn btn-primary" href="https://howtogiveback.org" target="_blank" rel="noopener noreferrer">Activate Referral Funnel</a>
+        </article>
+        <article class="monetize-card">
+          <h3>Premium Signals</h3>
+          <p>Package ALFRED strategy alerts and market commentary as a paid subscriber tier.</p>
+          <a class="btn btn-primary" href="mailto:support@howtogiveback.org?subject=Premium%20Signals%20Setup">Launch Premium Tier</a>
+        </article>
+        <article class="monetize-card">
+          <h3>Command Services</h3>
+          <p>Offer one-on-one portfolio strategy sessions and automated workflow setup services.</p>
+          <a class="btn btn-primary" href="mailto:support@howtogiveback.org?subject=Command%20Services">Book Strategy Calls</a>
+        </article>
+      </div>
     </section>
 
     <!-- ALFRED AI Communicator -->
