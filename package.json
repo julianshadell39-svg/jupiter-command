@@ -23,6 +23,7 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "4.0.14",
     "ethers": "6.17.0",
-    "hardhat": "3.9.1"
+    "hardhat": "3.9.1",
+    "solc": "0.8.28"
   }
 }

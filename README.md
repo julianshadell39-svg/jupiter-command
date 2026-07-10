@@ -46,4 +46,4 @@ This repository now includes a minimal Hardhat setup for local contract developm
 3. Deploy the sample contract from a second terminal:
    - `yarn deploy`
 
-The deploy script compiles and deploys `/home/runner/work/jupiter-command/jupiter-command/contracts/Counter.sol` to the local node at `http://127.0.0.1:8545`.
+The deploy script compiles and deploys `contracts/Counter.sol` to the local node at `http://127.0.0.1:8545` using the locally installed `solc` package.
