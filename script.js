@@ -22,6 +22,7 @@ const ALFRED_RESPONSES = [
   { pattern: /\bprice\b|\bmarket\b|\bcost\b/i, reply: "Current prices are displayed in the Live Market section above, refreshed every 60 seconds via CoinGecko." },
   { pattern: /\bswap\b|\btrade\b|\bbuy\b|\bsell\b/i, reply: "To execute a swap on Jupiter, visit jup.ag, connect your Solana wallet, select your tokens, review the route, and confirm the transaction. Always check slippage settings before swapping." },
   { pattern: /\bwallet\b/i, reply: "Connect a Solana-compatible wallet — Phantom, Solflare, or Backpack work great with Jupiter Terminal. Never share your seed phrase." },
+  { pattern: /\baction\s+run\s+command\b/i, reply: "Action run command acknowledged, Commander. Awaiting your next execution target." },
   { pattern: /\bhelp\b|\bcommand\b|\bwhat\s+can\b/i, reply: "I can answer questions about Solana, Jupiter, DeFi, market prices, swaps, wallets, and portfolio strategy. Just ask — voice or text." },
   { pattern: /\bportfolio\b|\banalytics\b|\btrack\b/i, reply: "Portfolio analytics is on the roadmap for Jupiter Command. You'll be able to track P&L, holdings, and historical performance from this dashboard." },
   { pattern: /\bdonat\b|\bsupport\b/i, reply: "Thank you, Commander. Donations are accepted at the Solana wallet in the Donate section. Every contribution fuels mission-critical development." },
