@@ -21,6 +21,7 @@ const ALFRED_RESPONSES = [
   { pattern: /\bbnb\b|\bbinance\b/i, reply: "BNB is the native token of the BNB Chain ecosystem and Binance exchange. I track it alongside the other majors." },
   { pattern: /\bprice\b|\bmarket\b|\bcost\b/i, reply: "Current prices are displayed in the Live Market section above, refreshed every 60 seconds via CoinGecko." },
   { pattern: /\bswap\b|\btrade\b|\bbuy\b|\bsell\b/i, reply: "To execute a swap on Jupiter, visit jup.ag, connect your Solana wallet, select your tokens, review the route, and confirm the transaction. Always check slippage settings before swapping." },
+  { pattern: /\bpayment\b|\bpay\b/i, reply: "Payment is now available in the Payment section. Use the Phantom link to send SOL directly to the support wallet." },
   { pattern: /\bwallet\b/i, reply: "Connect a Solana-compatible wallet — Phantom, Solflare, or Backpack work great with Jupiter Terminal. Never share your seed phrase." },
   { pattern: /\baction\s+run\s+command\b/i, reply: "Action run command acknowledged, Commander. Awaiting your next execution target." },
   { pattern: /\bhelp\b|\bcommand\b|\bwhat\s+can\b/i, reply: "I can answer questions about Solana, Jupiter, DeFi, market prices, swaps, wallets, and portfolio strategy. Just ask — voice or text." },
