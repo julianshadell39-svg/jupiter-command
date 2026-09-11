@@ -6,6 +6,7 @@
 
 const COINGECKO_IDS = ['solana', 'jupiter-exchange-solana', 'bitcoin', 'ethereum', 'binancecoin'];
 const PRICE_REFRESH_MS = 60_000;
+const PUMP_FUN_URL = 'https://pump.fun';
 const COINGECKO_URL =
   'https://api.coingecko.com/api/v3/simple/price?ids=' +
   COINGECKO_IDS.join(',') +
@@ -25,6 +26,7 @@ const ALFRED_RESPONSES = [
   { pattern: /\bhelp\b|\bcommand\b|\bwhat\s+can\b/i, reply: "I can answer questions about Solana, Jupiter, DeFi, market prices, swaps, wallets, and portfolio strategy. Just ask — voice or text." },
   { pattern: /\bportfolio\b|\banalytics\b|\btrack\b/i, reply: "Portfolio analytics is on the roadmap for Jupiter Command. You'll be able to track P&L, holdings, and historical performance from this dashboard." },
   { pattern: /\bdonat\b|\bsupport\b/i, reply: "Thank you, Commander. Donations are accepted at the Solana wallet in the Donate section. Every contribution fuels mission-critical development." },
+  { pattern: /\b(click\s*up|super\s*agent|agents?)\b.*\bpump\.fun\b|\bpump\.fun\b.*\b(click\s*up|super\s*agent|agents?)\b/i, reply: "Click Up Agents engaged. Launching the pump.fun Super Agent now, Commander." },
   { pattern: /\bpump\.fun\b|\bpump\b|\blaunch\b/i, reply: "pump.fun integration is planned for a future update — you'll be able to monitor and interact with newly launched Solana tokens directly from Command." },
 ];
 
@@ -38,6 +40,7 @@ const sendBtn = document.getElementById('sendBtn');
 const micBtn = document.getElementById('micBtn');
 const voiceStatus = document.getElementById('voiceStatus');
 const copyWalletBtn = document.getElementById('copyWalletBtn');
+const pumpFunBtn = document.getElementById('pumpFunBtn');
 const footerYear = document.getElementById('footerYear');
 
 // ── Footer Year ────────────────────────────────────────────────────────────────
@@ -115,6 +118,14 @@ function appendMessage(sender, text) {
   alfredLog.scrollTop = alfredLog.scrollHeight;
 }
 
+function shouldLaunchPumpFun(text) {
+  return /\b(open|launch|go|click)\b.*\bpump\.fun\b|\bpump\.fun\b.*\b(open|launch|go|click)\b|\b(click\s*up|super\s*agent|agents?)\b.*\bpump\.fun\b|\bpump\.fun\b.*\b(click\s*up|super\s*agent|agents?)\b/i.test(text);
+}
+
+function launchPumpFun() {
+  window.open(PUMP_FUN_URL, '_blank', 'noopener,noreferrer');
+}
+
 function processCommand(input) {
   const text = input.trim();
   if (!text) return;
@@ -122,6 +133,7 @@ function processCommand(input) {
   const reply = alfredReply(text);
   // Small delay to feel more natural
   setTimeout(() => appendMessage('ALFRED', reply), 320);
+  if (shouldLaunchPumpFun(text)) launchPumpFun();
 }
 
 if (sendBtn) {
@@ -213,5 +225,13 @@ if (copyWalletBtn) {
         copyWalletBtn.textContent = 'Error';
         setTimeout(() => { copyWalletBtn.textContent = 'Copy'; }, 2000);
       });
+  });
+}
+
+if (pumpFunBtn) {
+  pumpFunBtn.addEventListener('click', () => {
+    appendMessage('Commander', 'Click Up Agents: pump.fun Super Agent');
+    setTimeout(() => appendMessage('ALFRED', 'Launching the pump.fun Super Agent now, Commander.'), 320);
+    launchPumpFun();
   });
 }

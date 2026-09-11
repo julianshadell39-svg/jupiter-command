@@ -33,4 +33,4 @@ AI Command Center for Jupiter DeFi on Solana. Built with Base44. Features wallet
 
 ## Product Scope Update
 
-- Add pump.fun integration to supported Solana DeFi workflows.
+- Enable Click Up Agents flow for launching the pump.fun Super Agent from UI and ALFRED commands.

@@ -225,6 +225,14 @@ section {
   margin: 0 auto;
 }
 
+.hero-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
 /* ── Price Ticker ────────────────────────────── */
 .price-ticker-section {
   background: var(--bg-panel);
