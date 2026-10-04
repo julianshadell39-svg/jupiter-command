@@ -16,6 +16,7 @@
       </a>
       <nav class="site-nav">
         <a href="#alfred">ALFRED</a>
+        <a href="#growth-ops">Growth Ops</a>
         <a href="#prices">Prices</a>
         <a href="#donate">Donate</a>
         <a href="#contact">Contact</a>
@@ -67,6 +68,50 @@
         </div>
       </div>
       <p class="price-source">Prices via CoinGecko — updates every 60 seconds</p>
+    </section>
+
+    <!-- Growth Operations -->
+    <section class="price-ticker-section" id="growth-ops">
+      <h2 class="section-title">Growth Operations (Stair-Step)</h2>
+      <div class="price-grid">
+        <article class="price-card">
+          <span class="ticker-symbol">Mode</span>
+          <span class="ticker-price">stair_step</span>
+          <span class="ticker-change positive">next_purchase: automatic</span>
+        </article>
+        <article class="price-card">
+          <span class="ticker-symbol">Exception</span>
+          <span class="ticker-price">review required</span>
+          <span class="ticker-change negative">exception_review: true</span>
+        </article>
+      </div>
+
+      <h3 class="section-title">Step Limits</h3>
+      <div class="price-grid">
+        <article class="price-card"><span class="ticker-symbol">Step 1</span><span class="ticker-price">$10</span><span class="ticker-change">unlock: initial_funding</span></article>
+        <article class="price-card"><span class="ticker-symbol">Step 2</span><span class="ticker-price">$15</span><span class="ticker-change">unlock: step_1_verified</span></article>
+        <article class="price-card"><span class="ticker-symbol">Step 3</span><span class="ticker-price">$25</span><span class="ticker-change">unlock: step_2_verified</span></article>
+        <article class="price-card"><span class="ticker-symbol">Step 4</span><span class="ticker-price">$40</span><span class="ticker-change">unlock: step_3_verified</span></article>
+        <article class="price-card"><span class="ticker-symbol">Step 5</span><span class="ticker-price">$60</span><span class="ticker-change">unlock: step_4_verified</span></article>
+      </div>
+
+      <h3 class="section-title">Auto-Authorization Rule</h3>
+      <div class="wallet-box">
+        <ul>
+          <li>Previous step is completed</li>
+          <li>Required funds are available</li>
+          <li>Purchase is within current step limit</li>
+          <li>No risk or security flag is active</li>
+          <li>Operation is permitted</li>
+        </ul>
+        <p class="donate-text">If all checks pass: <strong>NORMAL → AUTO-EXECUTE</strong>. Otherwise: <strong>EXCEPTION → HOLD FOR REVIEW</strong>.</p>
+      </div>
+
+      <h3 class="section-title">Operational Flow</h3>
+      <div class="wallet-box">
+        <p class="donate-text">Parallel Command → Supervisor Agent → Customer / Order / Service / Payment / Analytics Agents → Event &amp; Audit Bus → NAVI / SOPHIA / PIM EYES</p>
+        <p class="donate-text">Customer → Party → Order → Kitchen or Service → Payment → Analytics → Customer history → AI operational insights</p>
+      </div>
     </section>
 
     <!-- ALFRED AI Communicator -->
